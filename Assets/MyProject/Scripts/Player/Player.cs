@@ -12,6 +12,7 @@ public class Player : LifeController
     [Header("Movement")]
     private Vector2 direction;
     [SerializeField] private float speed;
+    [SerializeField] private bool facingLeft;
     public bool canMove;
 
     private void Awake()
@@ -31,6 +32,8 @@ public class Player : LifeController
     {
         Inputs();
         Anim();
+
+        if (direction.x < 0 && !facingLeft || direction.x > 0 && facingLeft) Flip();
     }
 
     private void FixedUpdate()
@@ -51,6 +54,12 @@ public class Player : LifeController
     private void Move()
     {
         rb.velocity = direction * speed * Time.fixedDeltaTime;
+    }
+
+    private void Flip()
+    {
+        facingLeft = !facingLeft;
+        transform.Rotate(Vector2.up * 180f);
     }
 
     private void Anim()
