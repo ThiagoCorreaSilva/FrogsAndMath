@@ -15,6 +15,10 @@ public class Player : LifeController
     [SerializeField] private bool facingLeft;
     public bool canMove;
 
+    [Header("Combat")]
+    public float damage;
+    public float criticalDamage;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

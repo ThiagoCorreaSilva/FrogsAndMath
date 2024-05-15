@@ -1,18 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleSystem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject battlePanel;
+    private Enemy enemy;
+
+    private void Awake()
     {
-        
+        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        battlePanel.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (enemy.onFight) StartBattle();
+    }
+
+    private void StartBattle()
+    {
+        battlePanel.SetActive(true);
+
     }
 }
