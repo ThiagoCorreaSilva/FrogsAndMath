@@ -808,6 +808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battlePanel: {fileID: 1790753034}
+  attackButton: {fileID: 132254164}
 --- !u!4 &1053503366
 Transform:
   m_ObjectHideFlags: 0
@@ -838,7 +839,7 @@ GameObject:
   - component: {fileID: 1184865919}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -903,7 +904,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184865916}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4487624, y: 0.07304849, z: 0}
+  m_LocalPosition: {x: -7.54, y: 0.07304849, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -927,7 +928,9 @@ MonoBehaviour:
   maxLife: 100
   death: 0
   speed: 2
-  distanceToFollow: 2
+  distanceToFollow: 4
+  damage: 0
+  criticalDamage: 0
   popUp: {fileID: 1754453022}
   onFight: 0
 --- !u!50 &1184865920
@@ -1450,6 +1453,8 @@ MonoBehaviour:
   speed: 400
   facingLeft: 0
   canMove: 0
+  damage: 0
+  criticalDamage: 0
 --- !u!50 &2096753694
 Rigidbody2D:
   serializedVersion: 4
