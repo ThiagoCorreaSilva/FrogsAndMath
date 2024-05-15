@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour
+[RequireComponent(typeof(CapsuleCollider2D))]
+public class Player : LifeController
 {
     private Rigidbody2D rb;
     private Animator anim;
 
+    [Header("Movement")]
     private Vector2 direction;
     [SerializeField] private float speed;
+    public bool canMove;
 
     private void Awake()
     {
@@ -17,9 +20,11 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    private void Start()
+    protected override void Start()
     {
         rb.gravityScale = 0f;
+
+        canMove = true;
     }
 
     private void Update()
@@ -35,6 +40,8 @@ public class Player : MonoBehaviour
 
     private void Inputs()
     {
+        if (!canMove) return;
+
         float _x = Input.GetAxisRaw("Horizontal");
         float _y = Input.GetAxisRaw("Vertical");
 

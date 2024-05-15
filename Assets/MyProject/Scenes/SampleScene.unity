@@ -530,6 +530,7 @@ GameObject:
   - component: {fileID: 1184865918}
   - component: {fileID: 1184865917}
   - component: {fileID: 1184865920}
+  - component: {fileID: 1184865921}
   - component: {fileID: 1184865919}
   m_Layer: 0
   m_Name: Enemy
@@ -618,6 +619,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5ead2a83e93dff409be73b617ffba4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLife: 0
+  maxLife: 100
+  death: 0
   speed: 2
   distanceToFollow: 2
   popUp: {fileID: 1754453022}
@@ -641,7 +645,23 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!70 &1184865921
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184865916}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1}
+  m_Direction: 0
 --- !u!1 &1607034695
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,6 +873,7 @@ GameObject:
   - component: {fileID: 2096753691}
   - component: {fileID: 2096753694}
   - component: {fileID: 2096753695}
+  - component: {fileID: 2096753696}
   - component: {fileID: 2096753693}
   m_Layer: 0
   m_Name: Player
@@ -940,6 +961,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e1c36c664f85994ebc6a0ae82493169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLife: 0
+  maxLife: 100
+  death: 0
   speed: 400
 --- !u!50 &2096753694
 Rigidbody2D:
@@ -961,7 +985,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &2096753695
 Animator:
   serializedVersion: 5
@@ -983,3 +1007,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &2096753696
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096753690}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
