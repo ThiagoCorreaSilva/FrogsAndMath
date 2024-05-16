@@ -15,6 +15,7 @@ public class LifeController : MonoBehaviour
     public virtual void Death()
     {
         death = true;
+        gameObject.SetActive(false);
     }
 
     public void TakeDamage(float _dmg)

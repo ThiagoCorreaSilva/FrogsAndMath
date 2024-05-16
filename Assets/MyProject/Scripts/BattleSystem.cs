@@ -34,14 +34,14 @@ public class BattleSystem : MonoBehaviour
         if (player.death)
         {
             battlePanel.SetActive(false);
-            isPlayerTurn = false;
+            StopAllCoroutines();
 
             Debug.Log("Player perdeu");
         }
         else if (enemy.death)
         {
             battlePanel.SetActive(false);
-            isPlayerTurn = false;
+            StopAllCoroutines();
 
             Debug.Log("Enemy perdeu");
         }
