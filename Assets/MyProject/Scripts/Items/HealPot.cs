@@ -9,7 +9,6 @@ public class HealPot : Items
         if (_other.gameObject.tag == "Player")
         {
             Effect();
-            Debug.Log("Pegou item");
         }
     }
 }

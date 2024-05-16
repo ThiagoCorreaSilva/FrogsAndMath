@@ -70,7 +70,9 @@ public class Player : LifeController
 
     private void Anim()
     {
-        anim.SetFloat("Speed_X", direction.x);
+        if (direction.x > 0 || direction.x < 0) anim.SetFloat("Speed_X", 1f);
+        else anim.SetFloat("Speed_X", 0f);
+
         anim.SetFloat("Speed_Y", direction.y);
     }
 }
