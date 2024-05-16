@@ -10,6 +10,7 @@ public class BattleSystem : MonoBehaviour
     private Enemy enemy;
     private Player player;
     [SerializeField] private bool isPlayerTurn;
+    [SerializeField] private bool clicked;
     [SerializeField] private float turnTime;
 
     private void Awake()
@@ -22,33 +23,47 @@ public class BattleSystem : MonoBehaviour
     {
         battlePanel.SetActive(false);
         attackButton.onClick.AddListener(Attack);
+
+        isPlayerTurn = true;
     }
 
     private void Update()
     {
         if (enemy.onFight) StartBattle();
 
-        attackButton.gameObject.SetActive(isPlayerTurn);
-
-        if (player.death || enemy.death)
+        if (player.death)
         {
-            StopAllCoroutines();
-            Debug.Log("Alguem ganhou");
+            battlePanel.SetActive(false);
+            isPlayerTurn = false;
+
+            Debug.Log("Player perdeu");
+        }
+        else if (enemy.death)
+        {
+            battlePanel.SetActive(false);
+            isPlayerTurn = false;
+
+            Debug.Log("Enemy perdeu");
         }
     }
 
     private void StartBattle()
     {
         battlePanel.SetActive(true);
-        isPlayerTurn = true;
+
+        StartCoroutine(PlayerTurn());
     }
 
     private IEnumerator PlayerTurn()
     {
-        if (isPlayerTurn)
+        if (isPlayerTurn && clicked)
         {
-            yield return new WaitForSeconds(turnTime);
+            Debug.Log("Player Atacou");
+
             isPlayerTurn = false;
+            attackButton.gameObject.SetActive(false);
+
+            yield return new WaitForSeconds(turnTime);
             StartCoroutine(EnemyTurn());
         }
     }
@@ -57,16 +72,22 @@ public class BattleSystem : MonoBehaviour
     {
         if (!isPlayerTurn)
         {
+            Debug.Log("Enemy Atacou");
+
+            clicked = false;
+            isPlayerTurn = true;
+
             player.TakeDamage(enemy.damage);
+            attackButton.gameObject.SetActive(true);
 
             yield return new WaitForSeconds(turnTime);
-            isPlayerTurn = true;
             StartCoroutine(PlayerTurn());
         }
     }
 
     private void Attack()
     {
-         GetComponent<Enemy>().TakeDamage(player.damage);
+         enemy.TakeDamage(player.damage);
+         clicked = true;
     }
 }

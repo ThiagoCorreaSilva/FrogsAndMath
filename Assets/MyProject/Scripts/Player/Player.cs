@@ -27,6 +27,8 @@ public class Player : LifeController
 
     protected override void Start()
     {
+        base.Start();
+
         rb.gravityScale = 0f;
 
         canMove = true;
@@ -52,12 +54,12 @@ public class Player : LifeController
         float _x = Input.GetAxisRaw("Horizontal");
         float _y = Input.GetAxisRaw("Vertical");
 
-        direction = new Vector2(_x, _y);
+        direction = new Vector2(_x, _y).normalized;
     }
 
     private void Move()
     {
-        rb.velocity = direction * speed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + direction * speed * Time.deltaTime);
     }
 
     private void Flip()

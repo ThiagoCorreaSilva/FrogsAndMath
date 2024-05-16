@@ -30,6 +30,8 @@ public class Enemy : LifeController
 
     protected override void Start()
     {
+        base.Start();
+
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
 
@@ -79,5 +81,6 @@ public class Enemy : LifeController
         base.Death();
 
         player.canMove = true;
+        Debug.Log("Morri");
     }
 }
