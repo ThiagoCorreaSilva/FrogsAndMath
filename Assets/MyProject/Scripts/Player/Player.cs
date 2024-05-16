@@ -17,7 +17,7 @@ public class Player : LifeController
 
     [Header("Combat")]
     public float damage;
-    public float criticalDamage;
+    [SerializeField] private float criticalDamage;
 
     private void Awake()
     {

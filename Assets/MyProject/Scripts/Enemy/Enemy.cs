@@ -15,7 +15,7 @@ public class Enemy : LifeController
     [SerializeField] private float distanceToFollow;
 
     [Header("Fight Variables")]
-    [SerializeField] private float damage;
+    public float damage;
     [SerializeField] private float criticalDamage;
     [SerializeField] private GameObject popUp;
     public bool onFight;
