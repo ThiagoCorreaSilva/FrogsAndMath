@@ -9,8 +9,8 @@ public class Items : MonoBehaviour
     [SerializeField] protected int index;
     [SerializeField] protected bool isUsable;
     [SerializeField] private Sprite itemImage;
-
     private Inventory inventory;
+
     private void Start()
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();

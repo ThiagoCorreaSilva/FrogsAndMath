@@ -11,7 +11,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Button[] slots;
     [SerializeField] private bool[] inventoryOccupied;
     [SerializeField] private int previousItem;
-    [SerializeField] private int[] itensIndex;
+    [SerializeField] private List<int> indexs;
+
     private Player player;
 
     private void Start()
@@ -56,18 +57,10 @@ public class Inventory : MonoBehaviour
         {
             if (inventoryOccupied[i] == false)
             {
-                if (previousItem == _index)
+                if (indexs.Contains(_index) || previousItem == _index)
                 {
-                    foreach (var _newIndex in itensIndex)
-                    {
-                        if (previousItem == _index || _newIndex == _index)
-                        {
-                            Debug.Log("Stack");
-
-                            previousItem = _index;
-                            break;
-                        }
-                    }
+                    Debug.Log("Stackado");
+                    previousItem = _index;
                 }
                 else
                 {
@@ -75,10 +68,12 @@ public class Inventory : MonoBehaviour
 
                     inventoryOccupied[i] = true;
                     slots[i].GetComponent<Image>().sprite = _newImage;
+
+                    indexs.Add(_index);
                     previousItem = _index;
                 }
-                return;
 
+                break;
             }
         }
     }

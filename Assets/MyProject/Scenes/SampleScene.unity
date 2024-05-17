@@ -448,7 +448,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &306183462
 PrefabInstance:
@@ -459,7 +459,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3455304688699007704, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_Name
-      value: HealPot (4)
+      value: capsule
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_RootOrder
@@ -516,7 +516,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3455304688699007704, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_Name
-      value: HealPot (6)
+      value: triangle
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_RootOrder
@@ -1070,7 +1070,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &620865886
 PrefabInstance:
@@ -1081,7 +1081,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3455304688699007704, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_Name
-      value: HealPot (3)
+      value: capsule
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_RootOrder
@@ -1622,7 +1622,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1025018278
 GameObject:
@@ -1793,7 +1793,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1070131815
 GameObject:
@@ -2003,7 +2003,7 @@ Transform:
   m_Children:
   - {fileID: 1607034696}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1184865919
 MonoBehaviour:
@@ -2072,7 +2072,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3455304688699007704, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_Name
-      value: HealPot (7)
+      value: triangle
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_RootOrder
@@ -2495,7 +2495,7 @@ RectTransform:
   - {fileID: 510072008}
   - {fileID: 1730489215}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3586,11 +3586,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3455304688699007704, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_Name
-      value: HealPot (5)
+      value: circle
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3663,11 +3663,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3455304688699007704, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_Name
-      value: HealPot (1)
+      value: circle
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3740,7 +3740,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3455304688699007704, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_Name
-      value: HealPot (2)
+      value: capsule
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_RootOrder
@@ -3875,7 +3875,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2096753693
 MonoBehaviour:
@@ -3988,11 +3988,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3455304688699007704, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_Name
-      value: HealPot
+      value: capsule
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_LocalPosition.x
