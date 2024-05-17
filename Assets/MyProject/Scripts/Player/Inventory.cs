@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Button closeInventory;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private Button[] slots;
-    [SerializeField] private List<string> itemsName;
+    [SerializeField] private List<GameObject> itemsName;
 
     private Player player;
 
@@ -49,18 +49,28 @@ public class Inventory : MonoBehaviour
         Debug.Log("Usou item");
     }
 
-    public void AddItem(string _itemName, Sprite _newImage)
+    public void AddItem(GameObject _item, Sprite _itemImage)
     {
-        if (itemsName.Contains(_itemName))
+
+        if (itemsName.Count >= slots.Length)
+        {
+            Debug.Log("Inventario cheio");
+            return;
+        }
+        else if (itemsName.Contains(_item))
         {
             Debug.Log("Stackado");
+            _item.SetActive(false);
         }
         else
         {
-            itemsName.Add(_itemName);
-
-            slots[itemsName.IndexOf(_itemName)].GetComponent<Image>().sprite = _newImage;
             Debug.Log("Novo Item");
+
+            _item.SetActive(false);
+
+            itemsName.Add(_item);
+
+            slots[itemsName.IndexOf(_item)].GetComponent<Image>().sprite = _itemImage;
         }
     }
 }
