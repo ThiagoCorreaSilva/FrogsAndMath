@@ -3977,8 +3977,7 @@ MonoBehaviour:
   - {fileID: 1640104923}
   - {fileID: 1927399139}
   inventoryOccupied: 00000000
-  previousItem: -1
-  itensIndex: 00000000010000000200000003000000
+  itemsName: []
 --- !u!1001 &3455304689246741497
 PrefabInstance:
   m_ObjectHideFlags: 0

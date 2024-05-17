@@ -6,15 +6,16 @@ using UnityEngine.UI;
 public class Items : MonoBehaviour
 {
     [SerializeField] protected float value;
-    [SerializeField] protected int index;
-    [SerializeField] protected bool isUsable;
+    [SerializeField] protected string itemName;
     [SerializeField] private Sprite itemImage;
+    [SerializeField] protected bool isUsable;
     private Inventory inventory;
 
     private void Start()
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         itemImage = GetComponent<SpriteRenderer>().sprite;
+        itemName = gameObject.name;
     }
 
     protected void Effect()
@@ -23,6 +24,6 @@ public class Items : MonoBehaviour
 
         if (!isUsable) return;
 
-        inventory.AddItem(index, itemImage);
+        inventory.AddItem(itemName, itemImage);
     }
 }

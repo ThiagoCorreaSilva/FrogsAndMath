@@ -9,9 +9,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Button closeInventory;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private Button[] slots;
-    [SerializeField] private bool[] inventoryOccupied;
-    [SerializeField] private int previousItem;
-    [SerializeField] private List<int> indexs;
+    [SerializeField] private List<string> itemsName;
 
     private Player player;
 
@@ -51,30 +49,18 @@ public class Inventory : MonoBehaviour
         Debug.Log("Usou item");
     }
 
-    public void AddItem(int _index, Sprite _newImage)
+    public void AddItem(string _itemName, Sprite _newImage)
     {
-        for (int i = 0; i < inventoryOccupied.Length; i++)
+        if (itemsName.Contains(_itemName))
         {
-            if (inventoryOccupied[i] == false)
-            {
-                if (indexs.Contains(_index) || previousItem == _index)
-                {
-                    Debug.Log("Stackado");
-                    previousItem = _index;
-                }
-                else
-                {
-                    Debug.Log("Novo item");
+            Debug.Log("Stackado");
+        }
+        else
+        {
+            itemsName.Add(_itemName);
 
-                    inventoryOccupied[i] = true;
-                    slots[i].GetComponent<Image>().sprite = _newImage;
-
-                    indexs.Add(_index);
-                    previousItem = _index;
-                }
-
-                break;
-            }
+            slots[itemsName.IndexOf(_itemName)].GetComponent<Image>().sprite = _newImage;
+            Debug.Log("Novo Item");
         }
     }
 }
