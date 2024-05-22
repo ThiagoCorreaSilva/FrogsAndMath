@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
@@ -9,7 +10,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Button closeInventory;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private Button[] slots;
-    [SerializeField] private List<string> itemsName;
+    [SerializeField] private List<string> itemsList;
     public bool isFull;
 
     private Player player;
@@ -45,22 +46,17 @@ public class Inventory : MonoBehaviour
         player.canMove = true;
     }
 
-    private void UseItem()
-    {
-        Debug.Log("Usou item");
-    }
-
     public void AddItem(string _itemName, Sprite _itemImage)
     {
 
-        if (itemsName.Count >= slots.Length)
+        if (itemsList.Count >= slots.Length)
         {
             isFull = true;
 
             Debug.Log("Inventario cheio");
             return;
         }
-        else if (itemsName.Contains(_itemName))
+        else if (itemsList.Contains(_itemName))
         {
             Debug.Log("Stackado");
         }
@@ -68,10 +64,15 @@ public class Inventory : MonoBehaviour
         {
             Debug.Log("Novo Item");
 
-            itemsName.Add(_itemName);
+            itemsList.Add(_itemName);
 
-            slots[itemsName.IndexOf(_itemName)].GetComponent<Image>().sprite = _itemImage;
+            slots[itemsList.IndexOf(_itemName)].GetComponent<Image>().sprite = _itemImage;
         }
+    }
+
+    public void UseItem()
+    {
+
     }
 }
 
