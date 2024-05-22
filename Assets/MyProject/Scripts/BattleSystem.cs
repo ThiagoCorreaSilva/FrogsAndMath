@@ -52,6 +52,8 @@ public class BattleSystem : MonoBehaviour
         battlePanel.SetActive(true);
 
         StartCoroutine(PlayerTurn());
+
+        player.direction.x = 0f;
     }
 
     private IEnumerator PlayerTurn()

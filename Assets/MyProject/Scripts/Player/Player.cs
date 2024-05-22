@@ -10,7 +10,7 @@ public class Player : LifeController
     private Animator anim;
 
     [Header("Movement")]
-    private Vector2 direction;
+    public Vector2 direction;
     [SerializeField] private float speed;
     [SerializeField] private bool facingLeft;
     public bool canMove;

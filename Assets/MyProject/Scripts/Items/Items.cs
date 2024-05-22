@@ -18,8 +18,9 @@ public class Items : MonoBehaviour
 
     protected void Effect()
     {
-        if (!isUsable) return;
+        if (!isUsable || inventory.isFull) return;
 
-        inventory.AddItem(gameObject, itemImage);
+        inventory.AddItem(gameObject.name, itemImage);
+        gameObject.SetActive(false);
     }
 }
