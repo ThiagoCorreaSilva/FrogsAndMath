@@ -10,9 +10,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Button closeInventory;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private Button[] slots;
-    [SerializeField] private List<string> itemsList;
+    [SerializeField] private List<string> itemsList = new();
     public bool isFull;
-
     private Player player;
 
     private void Start()
@@ -26,7 +25,8 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < slots.Length; i++)
         {
-            slots[i].onClick.AddListener(UseItem);
+            int _index = i;
+            slots[i].onClick.AddListener(() => UseItem(_index));
         }
     }
 
@@ -70,9 +70,16 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void UseItem()
+    private void UseItem(int _slotIndex)
     {
+        if (_slotIndex >= itemsList.Count || itemsList.Count == 0)
+        {
+            Debug.LogError("Fora de alcance");
+            return;
+        }
 
+        itemsList.RemoveAt(_slotIndex);
+        slots[_slotIndex].GetComponent<Image>().sprite = default;
     }
 }
 
