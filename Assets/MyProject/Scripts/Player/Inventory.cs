@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private Button[] slots;
     [SerializeField] private List<string> itemsList = new();
-    public bool itemAdded;
+    private bool itemAdded;
     public bool isFull;
     private Player player;
 
@@ -37,6 +37,7 @@ public class Inventory : MonoBehaviour
         openInventory.gameObject.SetActive(false);
 
         player.canMove = false;
+        player.direction = new Vector3(0f, 0f , 0f);
     }
 
     private void CloseInventory()
@@ -45,6 +46,14 @@ public class Inventory : MonoBehaviour
         openInventory.gameObject.SetActive(true);
 
         player.canMove = true;
+    }
+
+    private void Update()
+    {
+        if (itemsList.Count < slots.Length)
+        {
+            isFull = false;
+        }
     }
 
     public void AddItem(string _itemName, Sprite _itemImage)
