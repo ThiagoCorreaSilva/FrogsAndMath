@@ -2882,6 +2882,9 @@ MonoBehaviour:
   minNumber: 1
   maxNumber: 20
   result: 4
+  criticalTime: 10
+  timeElapsed: 0
+  canCritical: 0
 --- !u!4 &1053503366
 Transform:
   m_ObjectHideFlags: 0
@@ -3219,7 +3222,7 @@ MonoBehaviour:
   death: 0
   speed: 2
   distanceToFollow: 4
-  damage: 50
+  damage: 2
   criticalDamage: 0
   popUp: {fileID: 1754453022}
   onFight: 0
@@ -5534,7 +5537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLife: 0
-  maxLife: 100
+  maxLife: 10
   death: 0
   direction: {x: 0, y: 0}
   speed: 8

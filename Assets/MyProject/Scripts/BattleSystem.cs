@@ -23,6 +23,11 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] private int maxNumber;
     [SerializeField] private int result;
 
+    [Header("Critical Attack")]
+    [SerializeField] private float criticalTime;
+    [SerializeField] private float timeElapsed;
+    [SerializeField] private bool canCritical;
+    
     private void Awake()
     {
         enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
@@ -43,7 +48,12 @@ public class BattleSystem : MonoBehaviour
 
     private void Update()
     {
-        if (enemy.onFight) StartBattle();
+ 
+        if (enemy.onFight)
+        {
+            StartBattle();
+            timeElapsed += Time.deltaTime;
+        }
 
         if (player.death)
         {
@@ -79,7 +89,16 @@ public class BattleSystem : MonoBehaviour
 
             isPlayerTurn = false;
 
-            enemy.TakeDamage(player.damage);
+            if (canCritical)
+            {
+                Debug.Log("CRITICO");
+
+                enemy.TakeDamage(player.criticalDamage);
+            }
+            else
+                enemy.TakeDamage(player.damage);
+
+            canCritical = false;
 
             attackButton.gameObject.SetActive(false);
 
@@ -96,6 +115,7 @@ public class BattleSystem : MonoBehaviour
 
             clicked = false;
             isPlayerTurn = true;
+            canCritical = false;
 
             player.TakeDamage(enemy.damage);
 
@@ -108,6 +128,8 @@ public class BattleSystem : MonoBehaviour
     {
         answerInput.gameObject.SetActive(true);
         attackButton.gameObject.SetActive(false);
+
+        timeElapsed = 0f;
     }
 
     #endregion
@@ -127,6 +149,11 @@ public class BattleSystem : MonoBehaviour
 
                 isPlayerTurn = true;
                 clicked = true;
+
+                if (timeElapsed < criticalTime)
+                    canCritical = true;
+                else
+                    canCritical = false;
 
                 StartCoroutine(PlayerTurn());
                 RandomQuest();

@@ -17,7 +17,7 @@ public class Player : LifeController
 
     [Header("Combat")]
     public float damage;
-    [SerializeField] private float criticalDamage;
+    public float criticalDamage;
 
     private void Awake()
     {
@@ -30,6 +30,7 @@ public class Player : LifeController
         base.Start();
 
         rb.gravityScale = 0f;
+        criticalDamage = 2f * damage;
 
         canMove = true;
     }
