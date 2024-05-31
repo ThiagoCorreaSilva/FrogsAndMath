@@ -18,6 +18,7 @@ public class Enemy : LifeController
     public float damage;
     [SerializeField] private float criticalDamage;
     [SerializeField] private GameObject popUp;
+    [SerializeField] private GameObject fadeIn;
     public bool onFight;
 
     private void Awake()
@@ -35,6 +36,7 @@ public class Enemy : LifeController
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
 
+        fadeIn.SetActive(false);
         popUp.SetActive(false);
     }
 
@@ -71,6 +73,7 @@ public class Enemy : LifeController
         {
             onFight = true;
             player.canMove = false;
+            fadeIn.SetActive(true);
 
             transform.localPosition -= new Vector3(1.2f, 0f, 0f);
             speed = 0f;
