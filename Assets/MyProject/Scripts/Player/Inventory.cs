@@ -11,6 +11,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private Button[] slots;
     [SerializeField] private List<string> itemsList = new();
+    public bool itemAdded;
     public bool isFull;
     private Player player;
 
@@ -64,9 +65,22 @@ public class Inventory : MonoBehaviour
         {
             Debug.Log("Novo Item");
 
-            itemsList.Add(_itemName);
+            for (int i = 0; i < itemsList.Count; i++)
+            {
+                if (itemsList[i] == null)
+                {
+                    itemsList[i] = _itemName;
+                    slots[i].GetComponent<Image>().sprite = _itemImage;
+                    itemAdded = true;
+                    break;
+                }
+            }
 
-            slots[itemsList.IndexOf(_itemName)].GetComponent<Image>().sprite = _itemImage;
+            if (!itemAdded)
+            {
+                itemsList.Add(_itemName);
+                slots[itemsList.IndexOf(_itemName)].GetComponent<Image>().sprite = _itemImage;
+            }
         }
     }
 
@@ -78,8 +92,18 @@ public class Inventory : MonoBehaviour
             return;
         }
 
+        Debug.Log($"Usando item: {itemsList[_slotIndex]}");
+
         itemsList.RemoveAt(_slotIndex);
         slots[_slotIndex].GetComponent<Image>().sprite = default;
+
+        // Desloca os itens subsequentes para preencher o espaço vazio
+        for (int i = _slotIndex; i < itemsList.Count; i++)
+        {
+            slots[i].GetComponent<Image>().sprite = slots[i + 1].GetComponent<Image>().sprite;
+        }
+
+        // Limpa o último slot
+        slots[itemsList.Count].GetComponent<Image>().sprite = default;
     }
 }
-
