@@ -29,12 +29,10 @@ public class BattleSystem : MonoBehaviour
     private void Start()
     {
         battlePanel.SetActive(false);
+        attackButton.gameObject.SetActive(false);
 
         attackButton.onClick.AddListener(Attack);
         confirmAnswer.onClick.AddListener(InputValidation);
-
-        attackButton.gameObject.SetActive(false);
-        isPlayerTurn = true;
     }
 
     private void Update()
@@ -74,6 +72,7 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("Player Atacou");
 
             isPlayerTurn = false;
+
             attackButton.gameObject.SetActive(false);
 
             yield return new WaitForSeconds(turnTime);
@@ -91,10 +90,10 @@ public class BattleSystem : MonoBehaviour
             isPlayerTurn = true;
 
             player.TakeDamage(enemy.damage);
-            attackButton.gameObject.SetActive(true);
 
             yield return new WaitForSeconds(turnTime);
             StartCoroutine(PlayerTurn());
+            answerInput.gameObject.SetActive(true);
         }
     }
 
@@ -109,16 +108,33 @@ public class BattleSystem : MonoBehaviour
     #region AnswerValidation
     private void InputValidation()
     {
-        if (int.TryParse(answerInput.text, out result))
+        if (int.TryParse(answerInput.text, out int _playerResult))
         {
-            Debug.Log("Voce acertou");
-            attackButton.gameObject.SetActive(true);
+            if (_playerResult == result)
+            {
+                Debug.Log("Voce acertou");
+
+                isPlayerTurn = true;
+
+                attackButton.gameObject.SetActive(true);
+                answerInput.gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("Voce errou");
+
+                isPlayerTurn = false;
+
+                attackButton.gameObject.SetActive(false);
+                answerInput.gameObject.SetActive(false);
+
+                StartCoroutine(EnemyTurn());
+            }
+
         }
         else
         {
-            Debug.Log("Voce errou");
-            attackButton.gameObject.SetActive(false);
-            EnemyTurn();
+            Debug.LogError("Nao foi possivel converter");
         }
     }
 
