@@ -113,8 +113,10 @@ public class BattleSystem : MonoBehaviour
     #region AnswerValidation
     private void InputValidation()
     {
+        // Converte a string em int
         if (int.TryParse(answerInput.text, out int _playerResult))
         {
+            // Verifica se a resposta do player esta certa
             if (_playerResult == result)
             {
                 Debug.Log("Voce acertou");
@@ -151,11 +153,18 @@ public class BattleSystem : MonoBehaviour
         int _randomNumber2 = Random.Range(minNumber, maxNumber);
         int _randomOperation = Random.Range(0, operations.Length);
 
+        // Garantir que o primeiro numero sera maior
+        while (_randomNumber1 < _randomNumber2)
+        {
+            _randomNumber1 = Random.Range(minNumber, maxNumber);
+        }
+
+        // Verifica qual operation foi escolhida
         switch (operations[_randomOperation])
         {
             case '+':
                 result = _randomNumber1 + _randomNumber2;
-                 break;
+                break;
 
             case '-':
                 result = _randomNumber1 - _randomNumber2;
@@ -166,11 +175,24 @@ public class BattleSystem : MonoBehaviour
                 break;
 
             case '/':
+
+                // Garante que o primeiro e o segundo numeros sao pares
+                while (_randomNumber1 % 2 != 0 && _randomNumber1 > _randomNumber2)
+                {
+                    _randomNumber1 = Random.Range(minNumber, maxNumber);
+                }
+
+                while (_randomNumber2 % 2 != 0)
+                {
+                    _randomNumber2 = Random.Range(minNumber, maxNumber);
+                }
+
                 result = _randomNumber1 / _randomNumber2;
                 break;
         }
 
-        quests.text = _randomNumber1.ToString() + operations[_randomOperation].ToString() + _randomNumber2.ToString();
+        // Atualiza o texto de quest
+        quests.text = _randomNumber1.ToString() + " " + operations[_randomOperation].ToString() + " " + _randomNumber2.ToString();
     }
 
     #endregion

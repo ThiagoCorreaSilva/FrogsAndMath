@@ -2878,7 +2878,9 @@ MonoBehaviour:
   answerInput: {fileID: 87024207}
   confirmAnswer: {fileID: 1199969404}
   quests: {fileID: 1895970570}
-  randomQuest: []
+  operations: 2b002d002a002f00
+  minNumber: 1
+  maxNumber: 20
   result: 4
 --- !u!4 &1053503366
 Transform:
