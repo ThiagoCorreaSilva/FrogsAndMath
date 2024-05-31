@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,12 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] private bool clicked;
     [SerializeField] private float turnTime;
 
+    [Header("Puzzle")]
+    [SerializeField] TMP_InputField answerInput;
+    [SerializeField] Button confirmAnswer;
+    [SerializeField] TMP_Text randomQuest;
+    [SerializeField] private int result;
+
     private void Awake()
     {
         enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
@@ -22,8 +29,11 @@ public class BattleSystem : MonoBehaviour
     private void Start()
     {
         battlePanel.SetActive(false);
-        attackButton.onClick.AddListener(Attack);
 
+        attackButton.onClick.AddListener(Attack);
+        confirmAnswer.onClick.AddListener(InputValidation);
+
+        attackButton.gameObject.SetActive(false);
         isPlayerTurn = true;
     }
 
@@ -47,6 +57,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    #region BattleSystem
     private void StartBattle()
     {
         battlePanel.SetActive(true);
@@ -92,4 +103,24 @@ public class BattleSystem : MonoBehaviour
          enemy.TakeDamage(player.damage);
          clicked = true;
     }
+
+    #endregion
+
+    #region AnswerValidation
+    private void InputValidation()
+    {
+        if (int.TryParse(answerInput.text, out result))
+        {
+            Debug.Log("Voce acertou");
+            attackButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Voce errou");
+            attackButton.gameObject.SetActive(false);
+            EnemyTurn();
+        }
+    }
+
+    #endregion
 }
