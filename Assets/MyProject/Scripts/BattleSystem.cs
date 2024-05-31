@@ -154,6 +154,8 @@ public class BattleSystem : MonoBehaviour
             {
                 Debug.Log("Voce acertou");
 
+                answerInput.text = null;
+
                 answerInput.gameObject.SetActive(false);
 
                 isPlayerTurn = true;
@@ -170,6 +172,8 @@ public class BattleSystem : MonoBehaviour
             else
             {
                 Debug.Log("Voce errou");
+
+                answerInput.text = null;
 
                 isPlayerTurn = false;
                 clicked = false;
@@ -217,12 +221,12 @@ public class BattleSystem : MonoBehaviour
             case '/':
 
                 // Garante que o primeiro e o segundo numeros sao pares
-                while (_randomNumber1 % 2 != 0 && _randomNumber1 < _randomNumber2)
+                while (_randomNumber1 % 2 != 0)
                 {
                     _randomNumber1 = Random.Range(minNumber, maxNumber);
                 }
 
-                while (_randomNumber2 % 2 != 0)
+                while (_randomNumber2 % 2 != 0 && _randomNumber2 > _randomNumber1)
                 {
                     _randomNumber2 = Random.Range(minNumber, maxNumber);
                 }

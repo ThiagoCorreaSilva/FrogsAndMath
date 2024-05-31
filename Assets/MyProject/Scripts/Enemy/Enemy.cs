@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -75,7 +76,10 @@ public class Enemy : LifeController
             player.canMove = false;
             fadeIn.SetActive(true);
 
+            // Faz o inimigo ficar na mesma altura que o jogador, e ficar um pouco afastado
+            transform.localPosition = new Vector3(transform.localPosition.x, player.transform.position.y, transform.localPosition.z);
             transform.localPosition -= new Vector3(1.2f, 0f, 0f);
+
             speed = 0f;
         }
     }
