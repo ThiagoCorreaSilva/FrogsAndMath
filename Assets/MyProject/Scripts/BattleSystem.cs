@@ -17,7 +17,10 @@ public class BattleSystem : MonoBehaviour
     [Header("Puzzle")]
     [SerializeField] TMP_InputField answerInput;
     [SerializeField] Button confirmAnswer;
-    [SerializeField] TMP_Text randomQuest;
+    [SerializeField] TMP_Text quests;
+    [SerializeField] private char[] operations;
+    [SerializeField] private int minNumber;
+    [SerializeField] private int maxNumber;
     [SerializeField] private int result;
 
     private void Awake()
@@ -33,6 +36,8 @@ public class BattleSystem : MonoBehaviour
 
         attackButton.onClick.AddListener(Attack);
         confirmAnswer.onClick.AddListener(InputValidation);
+
+        RandomQuest();
     }
 
     private void Update()
@@ -118,6 +123,8 @@ public class BattleSystem : MonoBehaviour
 
                 attackButton.gameObject.SetActive(true);
                 answerInput.gameObject.SetActive(false);
+
+                RandomQuest();
             }
             else
             {
@@ -129,13 +136,41 @@ public class BattleSystem : MonoBehaviour
                 answerInput.gameObject.SetActive(false);
 
                 StartCoroutine(EnemyTurn());
+                RandomQuest();
             }
-
         }
         else
         {
             Debug.LogError("Nao foi possivel converter");
         }
+    }
+
+    private void RandomQuest()
+    {
+        int _randomNumber1 = Random.Range(minNumber, maxNumber);
+        int _randomNumber2 = Random.Range(minNumber, maxNumber);
+        int _randomOperation = Random.Range(0, operations.Length);
+
+        switch (operations[_randomOperation])
+        {
+            case '+':
+                result = _randomNumber1 + _randomNumber2;
+                 break;
+
+            case '-':
+                result = _randomNumber1 - _randomNumber2;
+                break;
+
+            case '*':
+                result = _randomNumber1 * _randomNumber2;
+                break;
+
+            case '/':
+                result = _randomNumber1 / _randomNumber2;
+                break;
+        }
+
+        quests.text = _randomNumber1.ToString() + operations[_randomOperation].ToString() + _randomNumber2.ToString();
     }
 
     #endregion
