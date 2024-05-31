@@ -32,7 +32,8 @@ public class BattleSystem : MonoBehaviour
     private void Start()
     {
         battlePanel.SetActive(false);
-        attackButton.gameObject.SetActive(false);
+        answerInput.gameObject.SetActive(false);
+        attackButton.gameObject.SetActive(true);
 
         attackButton.onClick.AddListener(Attack);
         confirmAnswer.onClick.AddListener(InputValidation);
@@ -78,6 +79,8 @@ public class BattleSystem : MonoBehaviour
 
             isPlayerTurn = false;
 
+            enemy.TakeDamage(player.damage);
+
             attackButton.gameObject.SetActive(false);
 
             yield return new WaitForSeconds(turnTime);
@@ -97,15 +100,14 @@ public class BattleSystem : MonoBehaviour
             player.TakeDamage(enemy.damage);
 
             yield return new WaitForSeconds(turnTime);
-            StartCoroutine(PlayerTurn());
-            answerInput.gameObject.SetActive(true);
+            attackButton.gameObject.SetActive(true);
         }
     }
 
     private void Attack()
     {
-         enemy.TakeDamage(player.damage);
-         clicked = true;
+        answerInput.gameObject.SetActive(true);
+        attackButton.gameObject.SetActive(false);
     }
 
     #endregion
@@ -121,18 +123,17 @@ public class BattleSystem : MonoBehaviour
             {
                 Debug.Log("Voce acertou");
 
-                isPlayerTurn = true;
-
-                attackButton.gameObject.SetActive(true);
                 answerInput.gameObject.SetActive(false);
 
+                isPlayerTurn = true;
+                clicked = true;
+
+                StartCoroutine(PlayerTurn());
                 RandomQuest();
             }
             else
             {
                 Debug.Log("Voce errou");
-
-                isPlayerTurn = false;
 
                 attackButton.gameObject.SetActive(false);
                 answerInput.gameObject.SetActive(false);
@@ -177,7 +178,7 @@ public class BattleSystem : MonoBehaviour
             case '/':
 
                 // Garante que o primeiro e o segundo numeros sao pares
-                while (_randomNumber1 % 2 != 0 && _randomNumber1 > _randomNumber2)
+                while (_randomNumber1 % 2 != 0 && _randomNumber1 < _randomNumber2)
                 {
                     _randomNumber1 = Random.Range(minNumber, maxNumber);
                 }
@@ -187,7 +188,7 @@ public class BattleSystem : MonoBehaviour
                     _randomNumber2 = Random.Range(minNumber, maxNumber);
                 }
 
-                result = _randomNumber1 / _randomNumber2;
+                result = Mathf.RoundToInt(_randomNumber1 / _randomNumber2);
                 break;
         }
 
