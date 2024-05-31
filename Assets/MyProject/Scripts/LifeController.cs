@@ -22,6 +22,9 @@ public class LifeController : MonoBehaviour
     {
         currentLife = Mathf.Max(currentLife - _dmg, 0f);
 
+        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        Invoke("AfterHit", 0.2f);
+
         if (currentLife == 0f)
             Death();
     }
@@ -29,5 +32,10 @@ public class LifeController : MonoBehaviour
     public void GainLife(float _life)
     {
         currentLife = Mathf.Min(currentLife + _life, maxLife);
+    }
+
+    private void AfterHit()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

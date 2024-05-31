@@ -72,6 +72,7 @@ public class Enemy : LifeController
             onFight = true;
             player.canMove = false;
 
+            transform.localPosition -= new Vector3(1.2f, 0f, 0f);
             speed = 0f;
         }
     }
@@ -81,6 +82,9 @@ public class Enemy : LifeController
         base.Death();
 
         player.canMove = true;
+
+        Destroy(gameObject);
+
         Debug.Log("Morri");
     }
 }

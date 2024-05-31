@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class BattleSystem : MonoBehaviour
 {
+    [SerializeField] private Camera cam;
+
     [SerializeField] private GameObject battlePanel;
     [SerializeField] private Button attackButton;
     private Enemy enemy;
@@ -13,6 +15,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] private bool isPlayerTurn;
     [SerializeField] private bool clicked;
     [SerializeField] private float turnTime;
+    [SerializeField] private TMP_Text winText;
 
     [Header("Puzzle")]
     [SerializeField] TMP_InputField answerInput;
@@ -39,6 +42,7 @@ public class BattleSystem : MonoBehaviour
         battlePanel.SetActive(false);
         answerInput.gameObject.SetActive(false);
         attackButton.gameObject.SetActive(true);
+        winText.gameObject.SetActive(false);
 
         attackButton.onClick.AddListener(Attack);
         confirmAnswer.onClick.AddListener(InputValidation);
@@ -48,7 +52,6 @@ public class BattleSystem : MonoBehaviour
 
     private void Update()
     {
- 
         if (enemy.onFight)
         {
             StartBattle();
@@ -58,6 +61,7 @@ public class BattleSystem : MonoBehaviour
         if (player.death)
         {
             battlePanel.SetActive(false);
+
             StopAllCoroutines();
 
             Debug.Log("Player perdeu");
@@ -65,6 +69,10 @@ public class BattleSystem : MonoBehaviour
         else if (enemy.death)
         {
             battlePanel.SetActive(false);
+            winText.gameObject.SetActive(true);
+
+            enemy.death = false;
+
             StopAllCoroutines();
 
             Debug.Log("Enemy perdeu");
@@ -118,6 +126,7 @@ public class BattleSystem : MonoBehaviour
             canCritical = false;
 
             player.TakeDamage(enemy.damage);
+            cam.GetComponent<CameraFollow>().CameraShake();
 
             yield return new WaitForSeconds(turnTime);
             attackButton.gameObject.SetActive(true);
@@ -161,6 +170,9 @@ public class BattleSystem : MonoBehaviour
             else
             {
                 Debug.Log("Voce errou");
+
+                isPlayerTurn = false;
+                clicked = false;
 
                 attackButton.gameObject.SetActive(false);
                 answerInput.gameObject.SetActive(false);
