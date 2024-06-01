@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class DisableGameObject : MonoBehaviour
 {
+    [SerializeField] private GameObject fadeIn;
+    
     public void Disable()
     {
-        gameObject.SetActive(false);
+        if (fadeIn == null)
+            gameObject.SetActive(false);
+        else
+            fadeIn.SetActive(false);
     }
 }

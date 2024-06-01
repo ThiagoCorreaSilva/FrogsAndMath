@@ -11,7 +11,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] private GameObject battlePanel;
     [SerializeField] private Button attackButton;
     [SerializeField] private Button skipButton;
-    private Enemy enemy;
+    public GameObject enemy;
     private Player player;
     [SerializeField] private bool isPlayerTurn;
     [SerializeField] private bool clicked;
@@ -34,7 +34,6 @@ public class BattleSystem : MonoBehaviour
     
     private void Awake()
     {
-        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Enemy>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
@@ -56,11 +55,8 @@ public class BattleSystem : MonoBehaviour
 
     private void Update()
     {
-        if (enemy.onFight)
-        {
-            StartBattle();
-            timeElapsed += Time.deltaTime;
-        }
+        // Cronometro para o tempo do critico
+        timeElapsed += Time.deltaTime;
 
         if (player.death)
         {
@@ -70,12 +66,12 @@ public class BattleSystem : MonoBehaviour
 
             Debug.Log("Player perdeu");
         }
-        else if (enemy.death)
+        else if (enemy.GetComponent<Enemy>().death && enemy != null)
         {
             battlePanel.SetActive(false);
             winText.gameObject.SetActive(true);
 
-            enemy.death = false;
+            player.GetComponent<Inventory>().openInventory.gameObject.SetActive(true);
 
             StopAllCoroutines();
 
@@ -84,9 +80,10 @@ public class BattleSystem : MonoBehaviour
     }
 
     #region BattleSystem
-    private void StartBattle()
+    public void StartBattle()
     {
         battlePanel.SetActive(true);
+        attackButton.gameObject.SetActive(true);
 
         StartCoroutine(PlayerTurn());
 
@@ -104,10 +101,10 @@ public class BattleSystem : MonoBehaviour
             if (canCritical)
             {
                 Debug.Log("CRITICO");
-                enemy.TakeDamage(player.criticalDamage);
+                enemy.GetComponent<Enemy>().TakeDamage(player.criticalDamage);
             }
             else
-                enemy.TakeDamage(player.damage);
+                enemy.GetComponent<Enemy>().TakeDamage(player.damage);
 
             canCritical = false;
 
@@ -117,6 +114,7 @@ public class BattleSystem : MonoBehaviour
             else skipButton.gameObject.SetActive(false);
 
             yield return new WaitForSeconds(turnTime);
+
             StartCoroutine(EnemyTurn());
         }
     }
@@ -131,11 +129,14 @@ public class BattleSystem : MonoBehaviour
             isPlayerTurn = true;
             canCritical = false;
 
-            player.TakeDamage(enemy.damage);
+            player.TakeDamage(enemy.GetComponent<Enemy>().damage);
             cam.GetComponent<CameraFollow>().CameraShake();
 
             yield return new WaitForSeconds(turnTime);
+
             attackButton.gameObject.SetActive(true);
+
+            player.GetComponent<Inventory>().openInventory.gameObject.SetActive(true);
         }
     }
 
@@ -143,6 +144,9 @@ public class BattleSystem : MonoBehaviour
     {
         attackButton.gameObject.SetActive(false);
         answerInput.gameObject.SetActive(true);
+
+        player.GetComponent<Inventory>().openInventory.gameObject.SetActive(false);
+        enemy.GetComponent<Enemy>().fadeIn.SetActive(false);
 
         if (player.canSkipQuest) skipButton.gameObject.SetActive(true);
         else skipButton.gameObject.SetActive(false);
@@ -165,6 +169,7 @@ public class BattleSystem : MonoBehaviour
 
                 answerInput.text = null;
 
+                // Desativa o menu de responder
                 answerInput.gameObject.SetActive(false);
 
                 isPlayerTurn = true;
@@ -187,6 +192,7 @@ public class BattleSystem : MonoBehaviour
                 isPlayerTurn = false;
                 clicked = false;
 
+                // Desativa todas as interfaces
                 attackButton.gameObject.SetActive(false);
                 answerInput.gameObject.SetActive(false);
 
@@ -197,6 +203,12 @@ public class BattleSystem : MonoBehaviour
         else
         {
             Debug.LogError("Nao foi possivel converter");
+
+            isPlayerTurn = false;
+            clicked = false;
+
+            StartCoroutine(EnemyTurn());
+            RandomQuest();
         }
 
         if (player.canSkipQuest || !player.canSkipQuest) skipButton.gameObject.SetActive(false);

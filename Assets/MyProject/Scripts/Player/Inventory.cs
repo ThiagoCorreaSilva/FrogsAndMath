@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private Button openInventory;
+    public Button openInventory;
     [SerializeField] private Button closeInventory;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private Button[] slots;

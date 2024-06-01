@@ -10,6 +10,7 @@ public class Enemy : LifeController
     private Rigidbody2D rb;
     private Animator anim;
     private Player player;
+    private BattleSystem battleSystem;
 
     [Header("Movement")]
     [SerializeField] private float speed;
@@ -19,7 +20,7 @@ public class Enemy : LifeController
     public float damage;
     [SerializeField] private float criticalDamage;
     [SerializeField] private GameObject popUp;
-    [SerializeField] private GameObject fadeIn;
+    public GameObject fadeIn;
     public bool onFight;
 
     private void Awake()
@@ -28,6 +29,7 @@ public class Enemy : LifeController
         anim = GetComponent<Animator>();
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        battleSystem = GameObject.FindGameObjectWithTag("BattleSystem").GetComponent<BattleSystem>();
     }
 
     protected override void Start()
@@ -74,11 +76,16 @@ public class Enemy : LifeController
         {
             onFight = true;
             player.canMove = false;
+            battleSystem.enemy = gameObject;
+
+            battleSystem.StartBattle();
+
             fadeIn.SetActive(true);
 
-            // Faz o inimigo ficar na mesma altura que o jogador, e ficar um pouco afastado
+            // Faz o inimigo ficar na mesma altura que o jogador, e faz ficar um pouco afastado
             transform.localPosition = new Vector3(transform.localPosition.x, player.transform.position.y, transform.localPosition.z);
-            transform.localPosition -= new Vector3(1.2f, 0f, 0f);
+            Vector3 _newPos = transform.TransformDirection(Vector2.left);
+            transform.localPosition += _newPos + new Vector3(- 5, 0);
 
             speed = 0f;
         }
