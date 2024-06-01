@@ -6057,7 +6057,7 @@ MonoBehaviour:
   speed: 8
   facingLeft: 0
   canMove: 0
-  damage: 10
+  damage: 4
   criticalDamage: 0
   canSkipQuest: 0
 --- !u!50 &2096753694

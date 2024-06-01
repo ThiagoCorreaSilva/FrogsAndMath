@@ -243,16 +243,12 @@ public class BattleSystem : MonoBehaviour
 
             case '/':
 
-                // Garante que o primeiro e o segundo numeros sao pares
-                while (_randomNumber1 % 2 != 0 && _randomNumber2 > _randomNumber1)
-                {
+                // Garante que os dois numeros sempre gerao par e o numero 1 sera maior
+                while (_randomNumber1 % 2 != 0)
                     _randomNumber1 = Random.Range(minNumber, maxNumber);
-                }
 
                 while (_randomNumber2 % 2 != 0)
-                {
-                    _randomNumber2 = Random.Range(minNumber, maxNumber);
-                }
+                    _randomNumber2 = Random.Range(minNumber, _randomNumber1);
 
                 result = Mathf.RoundToInt(_randomNumber1 / _randomNumber2);
                 break;
