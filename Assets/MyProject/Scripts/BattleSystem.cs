@@ -10,6 +10,7 @@ public class BattleSystem : MonoBehaviour
 
     [SerializeField] private GameObject battlePanel;
     [SerializeField] private Button attackButton;
+    [SerializeField] private Button skipButton;
     private Enemy enemy;
     private Player player;
     [SerializeField] private bool isPlayerTurn;
@@ -41,10 +42,12 @@ public class BattleSystem : MonoBehaviour
     {
         battlePanel.SetActive(false);
         answerInput.gameObject.SetActive(false);
-        attackButton.gameObject.SetActive(true);
+        skipButton.gameObject.SetActive(false);
         winText.gameObject.SetActive(false);
+        attackButton.gameObject.SetActive(true);
 
         attackButton.onClick.AddListener(Attack);
+        skipButton.onClick.AddListener(SkipQuest);
         confirmAnswer.onClick.AddListener(InputValidation);
 
         RandomQuest();
@@ -77,6 +80,7 @@ public class BattleSystem : MonoBehaviour
 
             Debug.Log("Enemy perdeu");
         }
+
     }
 
     #region BattleSystem
@@ -137,6 +141,7 @@ public class BattleSystem : MonoBehaviour
     {
         answerInput.gameObject.SetActive(true);
         attackButton.gameObject.SetActive(false);
+        skipButton.gameObject.SetActive(true);
 
         timeElapsed = 0f;
     }
@@ -237,6 +242,13 @@ public class BattleSystem : MonoBehaviour
 
         // Atualiza o texto de quest
         quests.text = _randomNumber1.ToString() + " " + operations[_randomOperation].ToString() + " " + _randomNumber2.ToString();
+    }
+
+    private void SkipQuest()
+    {
+        RandomQuest();
+
+        skipButton.gameObject.SetActive(false);
     }
 
     #endregion
