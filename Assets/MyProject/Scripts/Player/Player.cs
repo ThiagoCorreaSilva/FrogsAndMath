@@ -18,6 +18,7 @@ public class Player : LifeController
     [Header("Combat")]
     public float damage;
     public float criticalDamage;
+    public bool canSkipQuest;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class Player : LifeController
         criticalDamage = 2f * damage;
 
         canMove = true;
+        canSkipQuest = true;
     }
 
     private void Update()

@@ -42,8 +42,9 @@ public class BattleSystem : MonoBehaviour
     {
         battlePanel.SetActive(false);
         answerInput.gameObject.SetActive(false);
-        skipButton.gameObject.SetActive(false);
+        skipButton.gameObject.SetActive(player.canSkipQuest);
         winText.gameObject.SetActive(false);
+
         attackButton.gameObject.SetActive(true);
 
         attackButton.onClick.AddListener(Attack);
@@ -139,9 +140,10 @@ public class BattleSystem : MonoBehaviour
 
     private void Attack()
     {
-        answerInput.gameObject.SetActive(true);
         attackButton.gameObject.SetActive(false);
-        skipButton.gameObject.SetActive(true);
+
+        answerInput.gameObject.SetActive(true);
+        skipButton.gameObject.SetActive(player.canSkipQuest);
 
         timeElapsed = 0f;
     }
@@ -246,9 +248,12 @@ public class BattleSystem : MonoBehaviour
 
     private void SkipQuest()
     {
+        if (!player.canSkipQuest) return;
+
         RandomQuest();
 
-        skipButton.gameObject.SetActive(false);
+        player.canSkipQuest = false;
+        skipButton.gameObject.SetActive(player.canSkipQuest);
     }
 
     #endregion
