@@ -81,7 +81,6 @@ public class BattleSystem : MonoBehaviour
 
             Debug.Log("Enemy perdeu");
         }
-
     }
 
     #region BattleSystem
@@ -105,7 +104,6 @@ public class BattleSystem : MonoBehaviour
             if (canCritical)
             {
                 Debug.Log("CRITICO");
-
                 enemy.TakeDamage(player.criticalDamage);
             }
             else
@@ -114,6 +112,9 @@ public class BattleSystem : MonoBehaviour
             canCritical = false;
 
             attackButton.gameObject.SetActive(false);
+
+            if (player.canSkipQuest) skipButton.gameObject.SetActive(true);
+            else skipButton.gameObject.SetActive(false);
 
             yield return new WaitForSeconds(turnTime);
             StartCoroutine(EnemyTurn());
@@ -141,9 +142,10 @@ public class BattleSystem : MonoBehaviour
     private void Attack()
     {
         attackButton.gameObject.SetActive(false);
-
         answerInput.gameObject.SetActive(true);
-        skipButton.gameObject.SetActive(player.canSkipQuest);
+
+        if (player.canSkipQuest) skipButton.gameObject.SetActive(true);
+        else skipButton.gameObject.SetActive(false);
 
         timeElapsed = 0f;
     }
@@ -196,6 +198,8 @@ public class BattleSystem : MonoBehaviour
         {
             Debug.LogError("Nao foi possivel converter");
         }
+
+        if (player.canSkipQuest || !player.canSkipQuest) skipButton.gameObject.SetActive(false);
     }
 
     private void RandomQuest()
@@ -228,12 +232,12 @@ public class BattleSystem : MonoBehaviour
             case '/':
 
                 // Garante que o primeiro e o segundo numeros sao pares
-                while (_randomNumber1 % 2 != 0)
+                while (_randomNumber1 % 2 != 0 && _randomNumber2 > _randomNumber1)
                 {
                     _randomNumber1 = Random.Range(minNumber, maxNumber);
                 }
 
-                while (_randomNumber2 % 2 != 0 && _randomNumber2 > _randomNumber1)
+                while (_randomNumber2 % 2 != 0)
                 {
                     _randomNumber2 = Random.Range(minNumber, maxNumber);
                 }
