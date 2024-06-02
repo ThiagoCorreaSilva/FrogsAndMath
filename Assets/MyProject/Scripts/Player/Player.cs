@@ -12,13 +12,14 @@ public class Player : LifeController
     [Header("Movement")]
     public Vector2 direction;
     [SerializeField] private float speed;
-    [SerializeField] private bool facingLeft;
+    public bool facingLeft;
     public bool canMove;
 
     [Header("Combat")]
     public float damage;
     public float criticalDamage;
     public bool canSkipQuest;
+    public Transform battlePos;
 
     private void Awake()
     {

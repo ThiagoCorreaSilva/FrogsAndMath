@@ -82,14 +82,8 @@ public class Enemy : LifeController
 
             fadeIn.SetActive(true);
 
-            // Faz o inimigo ficar na mesma altura que o jogador
-            transform.localPosition = new Vector3(transform.localPosition.x, player.transform.position.y, transform.localPosition.z);
-
-            if (transform.position.x > 0)
-                transform.position += new Vector3(2, 0, 0);
-
-            else if (transform.position.x < 0)
-                transform.position += new Vector3(-2, 0, 0);
+            // Faz o inimigo ficar em uma position especifica
+            transform.localPosition = player.battlePos.position;
 
             speed = 0f;
         }
@@ -101,7 +95,8 @@ public class Enemy : LifeController
 
         player.canMove = true;
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        Destroy(gameObject, 2f);
 
         Debug.Log("Morri");
     }

@@ -202,8 +202,6 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Nao foi possivel converter");
-
             isPlayerTurn = false;
             clicked = false;
 
