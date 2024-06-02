@@ -15,7 +15,7 @@ public class BattleSystem : MonoBehaviour
     public GameObject enemy;
     private Player player;
     [SerializeField] private bool isPlayerTurn;
-    [SerializeField] private bool clicked;
+    [SerializeField] private bool atkButtonClicked;
     [SerializeField] private float turnTime;
     [SerializeField] private TMP_Text winText;
 
@@ -50,8 +50,6 @@ public class BattleSystem : MonoBehaviour
         attackButton.onClick.AddListener(Attack);
         skipButton.onClick.AddListener(SkipQuest);
         confirmAnswer.onClick.AddListener(InputValidation);
-
-        RandomQuest();
     }
 
     private void Update()
@@ -78,6 +76,9 @@ public class BattleSystem : MonoBehaviour
 
             Debug.Log("Enemy perdeu");
         }
+
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) && isPlayerTurn && atkButtonClicked)
+            InputValidation();
     }
 
     #region BattleSystem
@@ -87,17 +88,20 @@ public class BattleSystem : MonoBehaviour
         attackButton.gameObject.SetActive(true);
 
         StartCoroutine(PlayerTurn());
+        RandomQuest();
 
+        // Trava o player e o inimigo fica na position do jogador
         player.direction.x = 0f;
         enemy.transform.position = battlePos.position;
     }
 
     private IEnumerator PlayerTurn()
     {
-        if (isPlayerTurn && clicked)
+        if (isPlayerTurn && atkButtonClicked)
         {
             Debug.Log("Player Atacou");
 
+            atkButtonClicked = false;
             isPlayerTurn = false;
 
             if (canCritical)
@@ -127,8 +131,7 @@ public class BattleSystem : MonoBehaviour
         {
             Debug.Log("Enemy Atacou");
 
-            clicked = false;
-            isPlayerTurn = true;
+            atkButtonClicked = false;
             canCritical = false;
 
             player.TakeDamage(enemy.GetComponent<Enemy>().damage);
@@ -138,6 +141,7 @@ public class BattleSystem : MonoBehaviour
 
             attackButton.gameObject.SetActive(true);
 
+            isPlayerTurn = true;
             player.GetComponent<Inventory>().openInventory.gameObject.SetActive(true);
         }
     }
@@ -152,6 +156,9 @@ public class BattleSystem : MonoBehaviour
 
         if (player.canSkipQuest) skipButton.gameObject.SetActive(true);
         else skipButton.gameObject.SetActive(false);
+
+        atkButtonClicked = true;
+        isPlayerTurn = true;
 
         timeElapsed = 0f;
     }
@@ -174,9 +181,6 @@ public class BattleSystem : MonoBehaviour
                 // Desativa o menu de responder
                 answerInput.gameObject.SetActive(false);
 
-                isPlayerTurn = true;
-                clicked = true;
-
                 if (timeElapsed < criticalTime)
                     canCritical = true;
                 else
@@ -190,9 +194,6 @@ public class BattleSystem : MonoBehaviour
                 Debug.Log("Voce errou");
 
                 answerInput.text = null;
-
-                isPlayerTurn = false;
-                clicked = false;
 
                 // Desativa todas as interfaces
                 attackButton.gameObject.SetActive(false);
@@ -209,7 +210,7 @@ public class BattleSystem : MonoBehaviour
             answerInput.gameObject.SetActive(false);
 
             isPlayerTurn = false;
-            clicked = false;
+            atkButtonClicked = false;
 
             StartCoroutine(EnemyTurn());
             RandomQuest();
