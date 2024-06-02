@@ -77,7 +77,7 @@ public class BattleSystem : MonoBehaviour
             Debug.Log("Enemy perdeu");
         }
 
-        if (Input.GetKeyDown(KeyCode.KeypadEnter) && isPlayerTurn && atkButtonClicked)
+        if (Input.GetKeyDown(KeyCode.Return) && isPlayerTurn && atkButtonClicked)
             InputValidation();
     }
 
@@ -176,8 +176,6 @@ public class BattleSystem : MonoBehaviour
             {
                 Debug.Log("Voce acertou");
 
-                answerInput.text = null;
-
                 // Desativa o menu de responder
                 answerInput.gameObject.SetActive(false);
 
@@ -217,6 +215,8 @@ public class BattleSystem : MonoBehaviour
         }
 
         if (player.canSkipQuest || !player.canSkipQuest) skipButton.gameObject.SetActive(false);
+
+        answerInput.text = null;
     }
 
     private void RandomQuest()
