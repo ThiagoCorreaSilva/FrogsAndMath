@@ -204,6 +204,10 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
+            // Desativa todas as interfaces
+            attackButton.gameObject.SetActive(false);
+            answerInput.gameObject.SetActive(false);
+
             isPlayerTurn = false;
             clicked = false;
 
