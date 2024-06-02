@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BattleSystem : MonoBehaviour
 {
     [SerializeField] private Camera cam;
+    [SerializeField] private Transform battlePos;
 
     [SerializeField] private GameObject battlePanel;
     [SerializeField] private Button attackButton;
@@ -66,7 +67,7 @@ public class BattleSystem : MonoBehaviour
 
             Debug.Log("Player perdeu");
         }
-        else if (enemy.GetComponent<Enemy>().death && enemy != null)
+        else if (enemy != null && enemy.GetComponent<Enemy>().death)
         {
             battlePanel.SetActive(false);
             winText.gameObject.SetActive(true);
@@ -88,6 +89,7 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(PlayerTurn());
 
         player.direction.x = 0f;
+        enemy.transform.position = battlePos.position;
     }
 
     private IEnumerator PlayerTurn()

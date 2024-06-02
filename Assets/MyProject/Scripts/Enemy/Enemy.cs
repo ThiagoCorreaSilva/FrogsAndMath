@@ -82,9 +82,6 @@ public class Enemy : LifeController
 
             fadeIn.SetActive(true);
 
-            // Faz o inimigo ficar em uma position especifica
-            transform.localPosition = player.battlePos.position;
-
             speed = 0f;
         }
     }

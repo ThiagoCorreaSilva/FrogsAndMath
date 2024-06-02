@@ -19,7 +19,6 @@ public class Player : LifeController
     public float damage;
     public float criticalDamage;
     public bool canSkipQuest;
-    public Transform battlePos;
 
     private void Awake()
     {
