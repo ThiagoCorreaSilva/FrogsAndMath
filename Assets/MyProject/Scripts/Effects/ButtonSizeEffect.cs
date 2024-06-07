@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ButtonSizeEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ButtonSizeEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] private Vector3 newSize = new Vector3(1.7f , 1.7f, 1.7f);
     private Vector3 initialSize;
@@ -20,6 +20,11 @@ public class ButtonSizeEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
     }
 
     public void OnPointerExit(PointerEventData eventData)
+    {
+        transform.localScale = initialSize;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
     {
         transform.localScale = initialSize;
     }
