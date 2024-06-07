@@ -8,7 +8,13 @@ public class HealPot : Items
     {
         if (_other.gameObject.tag == "Player")
         {
-            Effect();
+            AddItemOnInventory();
         }
+    }
+    
+    public override void Effect()
+    {
+        player.GainLife(value);
+        Debug.Log("Vida ganha");
     }
 }

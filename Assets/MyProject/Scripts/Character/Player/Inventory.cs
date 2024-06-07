@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Button closeInventory;
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private Button[] slots;
-    [SerializeField] private List<string> itemsList = new();
+    [SerializeField] private List<GameObject> itemsList = new();
     private bool itemAdded;
     public bool isFull;
     private Player player;
@@ -56,9 +56,8 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(string _itemName, Sprite _itemImage)
+    public void AddItem(GameObject _itemObject)
     {
-
         if (itemsList.Count >= slots.Length)
         {
             isFull = true;
@@ -66,7 +65,7 @@ public class Inventory : MonoBehaviour
             Debug.Log("Inventario cheio");
             return;
         }
-        else if (itemsList.Contains(_itemName))
+        else if (IsOnList(_itemObject))
         {
             Debug.Log("Stackado");
         }
@@ -78,8 +77,8 @@ public class Inventory : MonoBehaviour
             {
                 if (itemsList[i] == null)
                 {
-                    itemsList[i] = _itemName;
-                    slots[i].GetComponent<Image>().sprite = _itemImage;
+                    itemsList[i] = _itemObject;
+                    slots[i].GetComponent<Image>().sprite = _itemObject.GetComponent<SpriteRenderer>().sprite;
                     itemAdded = true;
                     break;
                 }
@@ -87,8 +86,8 @@ public class Inventory : MonoBehaviour
 
             if (!itemAdded)
             {
-                itemsList.Add(_itemName);
-                slots[itemsList.IndexOf(_itemName)].GetComponent<Image>().sprite = _itemImage;
+                itemsList.Add(_itemObject);
+                slots[itemsList.IndexOf(_itemObject)].GetComponent<Image>().sprite = _itemObject.GetComponent<SpriteRenderer>().sprite;
             }
         }
     }
@@ -101,7 +100,9 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Usando item: {itemsList[_slotIndex]}");
+        Debug.Log($"Usando o Item: {itemsList[_slotIndex].name}");
+        itemsList[_slotIndex].GetComponent<Items>().Effect();
+
 
         itemsList.RemoveAt(_slotIndex);
         slots[_slotIndex].GetComponent<Image>().sprite = default;
@@ -114,5 +115,16 @@ public class Inventory : MonoBehaviour
 
         // Limpa o último slot
         slots[itemsList.Count].GetComponent<Image>().sprite = default;
+    }
+
+    private bool IsOnList(GameObject _obj)
+    {
+        foreach (GameObject _item in itemsList)
+        {
+            if (_item.name == _obj.name)
+                return true;
+        }
+
+        return false;
     }
 }
