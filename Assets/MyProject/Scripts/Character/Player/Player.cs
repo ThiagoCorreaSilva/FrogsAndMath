@@ -56,7 +56,12 @@ public class Player : LifeController
     private void FixedUpdate()
     {
         if (!canMove)
-            transform.position = Vector2.zero;
+        {
+            rb.velocity = Vector2.zero;
+            joystick.joystickVec = Vector2.zero;
+
+            return;
+        }
 
         if (!platformCheck.IsOnMobile())
         {
@@ -64,11 +69,11 @@ public class Player : LifeController
             return;
         }
 
-        if (joystick.joystickVec.y != 0 && canMove)
+        if (joystick.joystickVec.y != 0)
         {
             rb.velocity = new Vector2(joystick.joystickVec.x * speed, joystick.joystickVec.y * speed);
         }
-        else if (joystick.joystickVec.y == 0 && canMove)
+        else if (joystick.joystickVec.y == 0)
         {
             rb.velocity = Vector2.zero;
         }
