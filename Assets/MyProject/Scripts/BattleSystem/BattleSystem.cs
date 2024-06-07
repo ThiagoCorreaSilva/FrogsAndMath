@@ -8,6 +8,8 @@ public class BattleSystem : MonoBehaviour
 {
     [SerializeField] private Camera cam;
     [SerializeField] private Transform battlePos;
+    [SerializeField] private GameObject joystickPanel;
+    private PlatformCheck platformCheck;
 
     [SerializeField] private GameObject battlePanel;
     [SerializeField] private Button attackButton;
@@ -36,6 +38,7 @@ public class BattleSystem : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        platformCheck = GameObject.FindGameObjectWithTag("PlatformCheck").GetComponent<PlatformCheck>();
     }
 
     private void Start()
@@ -72,6 +75,8 @@ public class BattleSystem : MonoBehaviour
 
             player.GetComponent<Inventory>().openInventory.gameObject.SetActive(true);
 
+            if (platformCheck.IsOnMobile()) joystickPanel.SetActive(true);
+
             StopAllCoroutines();
 
             Debug.Log("Enemy perdeu");
@@ -93,6 +98,8 @@ public class BattleSystem : MonoBehaviour
         // Trava o player e o inimigo fica na position do jogador
         player.direction.x = 0f;
         enemy.transform.position = battlePos.position;
+
+        if (platformCheck.IsOnMobile()) joystickPanel.SetActive(false);
     }
 
     private IEnumerator PlayerTurn()

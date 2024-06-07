@@ -70,7 +70,7 @@ public class Enemy : LifeController
             popUp.SetActive(false);
     }
 
-    private void OnCollisionEnter2D(Collision2D _other)
+    private void OnTriggerEnter2D(Collider2D _other)
     {
         if (_other.gameObject.tag == "Player")
         {

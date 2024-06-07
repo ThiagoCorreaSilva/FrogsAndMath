@@ -11,6 +11,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject inventoryPanel;
     [SerializeField] private Button[] slots;
     [SerializeField] private List<GameObject> itemsList = new();
+    [SerializeField] private GameObject joystickPanel;
+    private PlatformCheck platformCheck;
     private bool itemAdded;
     public bool isFull;
     private Player player;
@@ -23,6 +25,7 @@ public class Inventory : MonoBehaviour
         inventoryPanel.SetActive(false);
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        platformCheck = GameObject.FindGameObjectWithTag("PlatformCheck").GetComponent<PlatformCheck>();
 
         for (int i = 0; i < slots.Length; i++)
         {
@@ -38,6 +41,8 @@ public class Inventory : MonoBehaviour
 
         player.canMove = false;
         player.direction = new Vector3(0f, 0f , 0f);
+
+        if (platformCheck.IsOnMobile()) joystickPanel.SetActive(false);
     }
 
     private void CloseInventory()
@@ -46,6 +51,8 @@ public class Inventory : MonoBehaviour
         openInventory.gameObject.SetActive(true);
 
         player.canMove = true;
+
+        if (platformCheck.IsOnMobile()) joystickPanel.SetActive(true);
     }
 
     private void Update()

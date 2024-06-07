@@ -8,12 +8,15 @@ public class Player : LifeController
 {
     private Rigidbody2D rb;
     private Animator anim;
+    [SerializeField] private GameObject joystickPanel;
+    private PlatformCheck platformCheck;
 
     [Header("Movement")]
     public Vector2 direction;
     [SerializeField] private float speed;
     public bool facingLeft;
     public bool canMove;
+    [SerializeField] private Joystick joystick;
 
     [Header("Combat")]
     public float damage;
@@ -24,6 +27,9 @@ public class Player : LifeController
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        platformCheck = GameObject.FindGameObjectWithTag("PlatformCheck").GetComponent<PlatformCheck>();
+
     }
 
     protected override void Start()
@@ -35,6 +41,8 @@ public class Player : LifeController
 
         canMove = true;
         canSkipQuest = true;
+
+        if (!platformCheck.IsOnMobile()) joystickPanel.SetActive(false);
     }
 
     private void Update()
@@ -42,12 +50,33 @@ public class Player : LifeController
         Inputs();
         Anim();
 
-        if (direction.x < 0 && !facingLeft || direction.x > 0 && facingLeft) Flip();
+        if (direction.x < 0 && !facingLeft || direction.x > 0 && facingLeft || joystick.joystickVec.x < 0 && !facingLeft || joystick.joystickVec.x > 0 && facingLeft) Flip();
     }
 
     private void FixedUpdate()
     {
-        Move();
+        if (!canMove)
+        {
+            rb.velocity = Vector2.zero;
+            joystick.joystickVec = Vector2.zero;
+
+            return;
+        }
+
+        if (!platformCheck.IsOnMobile())
+        {
+            Move();
+            return;
+        }
+
+        if (joystick.joystickVec.y != 0)
+        {
+            rb.velocity = new Vector2(joystick.joystickVec.x * speed, joystick.joystickVec.y * speed);
+        }
+        else if (joystick.joystickVec.y == 0)
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
     private void Inputs()
@@ -73,7 +102,7 @@ public class Player : LifeController
 
     private void Anim()
     {
-        if (direction.x > 0 || direction.x < 0) anim.SetFloat("Speed_X", 1f);
+        if (direction.x != 0 || joystick.joystickVec.x != 0) anim.SetFloat("Speed_X", 1f);
         else anim.SetFloat("Speed_X", 0f);
 
         anim.SetFloat("Speed_Y", direction.y);
