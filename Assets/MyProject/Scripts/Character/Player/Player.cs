@@ -8,12 +8,14 @@ public class Player : LifeController
 {
     private Rigidbody2D rb;
     private Animator anim;
+    [SerializeField] private PlatformCheck platformCheck;
 
     [Header("Movement")]
     public Vector2 direction;
     [SerializeField] private float speed;
     public bool facingLeft;
     public bool canMove;
+    [SerializeField] private Joystick joystick;
 
     [Header("Combat")]
     public float damage;
@@ -47,7 +49,20 @@ public class Player : LifeController
 
     private void FixedUpdate()
     {
-        Move();
+        if (!platformCheck.IsOnMobile())
+        {
+            Move();
+            return;
+        }
+
+        if (joystick.joystickVec.y != 0 && canMove)
+        {
+            rb.velocity = new Vector2(joystick.joystickVec.x * speed, joystick.joystickVec.y * speed);
+        }
+        else if (joystick.joystickVec.y == 0 && canMove)
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
     private void Inputs()
