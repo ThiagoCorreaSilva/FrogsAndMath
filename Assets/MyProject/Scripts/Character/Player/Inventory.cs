@@ -34,6 +34,14 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (itemsList.Count < slots.Length)
+        {
+            isFull = false;
+        }
+    }
+
     private void OpenInventory()
     {
         inventoryPanel.SetActive(true);
@@ -53,14 +61,6 @@ public class Inventory : MonoBehaviour
         player.canMove = true;
 
         if (platformCheck.IsOnMobile()) joystickPanel.SetActive(true);
-    }
-
-    private void Update()
-    {
-        if (itemsList.Count < slots.Length)
-        {
-            isFull = false;
-        }
     }
 
     public void AddItem(GameObject _itemObject)
@@ -86,6 +86,11 @@ public class Inventory : MonoBehaviour
                 {
                     itemsList[i] = _itemObject;
                     slots[i].GetComponent<Image>().sprite = _itemObject.GetComponent<SpriteRenderer>().sprite;
+                    
+                    Color _color = slots[i].GetComponent<Image>().color;
+                    _color.a = 1f;
+                    slots[i].GetComponent<Image>().color = _color;
+
                     itemAdded = true;
                     break;
                 }
@@ -95,6 +100,10 @@ public class Inventory : MonoBehaviour
             {
                 itemsList.Add(_itemObject);
                 slots[itemsList.IndexOf(_itemObject)].GetComponent<Image>().sprite = _itemObject.GetComponent<SpriteRenderer>().sprite;
+
+                Color _color = slots[itemsList.IndexOf(_itemObject)].GetComponent<Image>().color;
+                _color.a = 1f;
+                slots[itemsList.IndexOf(_itemObject)].GetComponent<Image>().color = _color;
             }
         }
     }
@@ -110,9 +119,12 @@ public class Inventory : MonoBehaviour
         Debug.Log($"Usando o Item: {itemsList[_slotIndex].name}");
         itemsList[_slotIndex].GetComponent<Items>().Effect();
 
-
         itemsList.RemoveAt(_slotIndex);
         slots[_slotIndex].GetComponent<Image>().sprite = default;
+
+        Color _color = slots[_slotIndex].GetComponent<Image>().color;
+        _color.a = 0f;
+        slots[_slotIndex].GetComponent<Image>().color = _color;
 
         // Desloca os itens subsequentes para preencher o espaço vazio
         for (int i = _slotIndex; i < itemsList.Count; i++)

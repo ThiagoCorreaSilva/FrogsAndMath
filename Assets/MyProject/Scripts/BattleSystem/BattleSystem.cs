@@ -18,6 +18,7 @@ public class BattleSystem : MonoBehaviour
     private Player player;
     [SerializeField] private bool isPlayerTurn;
     [SerializeField] private bool atkButtonClicked;
+    [SerializeField] private bool alreadyEnd;
     [SerializeField] private float turnTime;
     [SerializeField] private TMP_Text winText;
 
@@ -34,7 +35,8 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] private float criticalTime;
     [SerializeField] private float timeElapsed;
     [SerializeField] private bool canCritical;
-    
+    [SerializeField] TMP_Text criticalText;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -47,6 +49,7 @@ public class BattleSystem : MonoBehaviour
         answerInput.gameObject.SetActive(false);
         skipButton.gameObject.SetActive(player.canSkipQuest);
         winText.gameObject.SetActive(false);
+        criticalText.gameObject.SetActive(false);
 
         attackButton.gameObject.SetActive(true);
 
@@ -68,10 +71,13 @@ public class BattleSystem : MonoBehaviour
 
             Debug.Log("Player perdeu");
         }
-        else if (enemy != null && enemy.GetComponent<Enemy>().death)
+        else if (enemy != null && enemy.GetComponent<Enemy>().death && !alreadyEnd)
         {
+            alreadyEnd = true;
+
             battlePanel.SetActive(false);
             winText.gameObject.SetActive(true);
+            criticalText.gameObject.SetActive(false);
 
             player.GetComponent<Inventory>().openInventory.gameObject.SetActive(true);
 
@@ -91,6 +97,8 @@ public class BattleSystem : MonoBehaviour
     {
         battlePanel.SetActive(true);
         attackButton.gameObject.SetActive(true);
+
+        alreadyEnd = false;
 
         StartCoroutine(PlayerTurn());
         RandomQuest();
@@ -114,7 +122,9 @@ public class BattleSystem : MonoBehaviour
             if (canCritical)
             {
                 Debug.Log("CRITICO");
+
                 enemy.GetComponent<Enemy>().TakeDamage(player.criticalDamage);
+                criticalText.gameObject.SetActive(true);
             }
             else
                 enemy.GetComponent<Enemy>().TakeDamage(player.damage);
@@ -260,10 +270,9 @@ public class BattleSystem : MonoBehaviour
 
                 // Garante que os dois numeros sempre gerao par e o numero 1 sera maior
                 while (_randomNumber1 % 2 != 0)
-                    _randomNumber1 = Random.Range(minNumber, maxNumber);
+                    _randomNumber1 = Random.Range(6, maxNumber);
 
-                while (_randomNumber2 % 2 != 0)
-                    _randomNumber2 = Random.Range(minNumber, _randomNumber1);
+                _randomNumber2 = Random.Range(2, _randomNumber1 - 2);
 
                 result = Mathf.RoundToInt(_randomNumber1 / _randomNumber2);
                 break;
