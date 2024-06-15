@@ -54,13 +54,15 @@ public class Player : LifeController
         if (!platformCheck.IsOnMobile()) joystickPanel.SetActive(false);
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         OnGround();
         Inputs();
         Anim();
 
-        if (rb.velocity.x < 0 && !facingLeft || rb.velocity.x > 0 && facingLeft) Flip();
+        if (direction.x < 0 && !facingLeft || direction.x > 0 && facingLeft) Flip();
     }
 
     private void FixedUpdate()
@@ -92,10 +94,18 @@ public class Player : LifeController
             rb.velocity = new Vector2(direction.x * speed * Time.deltaTime, rb.velocity.y);
 
         else if (draginRight && !draginLeft)
-            rb.velocity = new Vector2(1 * speed * Time.deltaTime, rb.velocity.y);
+        {
+            rb.velocity = new Vector2(direction.x = 1 * speed * Time.deltaTime, rb.velocity.y);
+
+            if (facingLeft) Flip();
+        }
 
         else if (draginLeft && !draginRight)
-            rb.velocity = new Vector2(-1 * speed * Time.deltaTime, rb.velocity.y);
+        {
+            rb.velocity = new Vector2(direction.x = -1 * speed * Time.deltaTime, rb.velocity.y);
+
+            if (!facingLeft) Flip();
+        }
     }
 
     private void Jump()

@@ -12,6 +12,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Button[] slots;
     [SerializeField] private List<GameObject> itemsList = new();
     [SerializeField] private GameObject joystickPanel;
+    [SerializeField] private GameObject playerUI;
+    [SerializeField] private BattleSystem battleSystem;
     private PlatformCheck platformCheck;
     private bool itemAdded;
     public bool isFull;
@@ -45,6 +47,7 @@ public class Inventory : MonoBehaviour
     private void OpenInventory()
     {
         inventoryPanel.SetActive(true);
+        playerUI.SetActive(false);
         openInventory.gameObject.SetActive(false);
 
         player.canMove = false;
@@ -56,11 +59,12 @@ public class Inventory : MonoBehaviour
     private void CloseInventory()
     {
         inventoryPanel.SetActive(false);
+        playerUI.SetActive(true);
         openInventory.gameObject.SetActive(true);
 
         player.canMove = true;
 
-        if (platformCheck.IsOnMobile()) joystickPanel.SetActive(true);
+        if (battleSystem.onBattle == false && platformCheck.IsOnMobile()) joystickPanel.SetActive(true);
     }
 
     public void AddItem(GameObject _itemObject)

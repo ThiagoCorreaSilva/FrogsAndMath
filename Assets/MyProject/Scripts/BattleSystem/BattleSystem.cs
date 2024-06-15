@@ -19,6 +19,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] private bool isPlayerTurn;
     [SerializeField] private bool atkButtonClicked;
     [SerializeField] private bool alreadyEnd;
+    public bool onBattle;
     [SerializeField] private float turnTime;
     [SerializeField] private TMP_Text winText;
 
@@ -65,6 +66,9 @@ public class BattleSystem : MonoBehaviour
 
         if (player.death)
         {
+            alreadyEnd = true;
+            onBattle = false;
+
             cam.orthographicSize = 5;
             cam.GetComponent<CameraFollow>().stopLerp = false;
 
@@ -77,6 +81,7 @@ public class BattleSystem : MonoBehaviour
         else if (enemy != null && enemy.GetComponent<Enemy>().death && !alreadyEnd)
         {
             alreadyEnd = true;
+            onBattle = false;
 
             battlePanel.SetActive(false);
             winText.gameObject.SetActive(true);
@@ -106,6 +111,7 @@ public class BattleSystem : MonoBehaviour
         attackButton.gameObject.SetActive(true);
 
         alreadyEnd = false;
+        onBattle = true;
 
         StartCoroutine(PlayerTurn());
         RandomQuest();
