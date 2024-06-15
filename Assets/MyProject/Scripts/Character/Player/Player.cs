@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
@@ -14,9 +15,17 @@ public class Player : LifeController
     [Header("Movement")]
     public Vector2 direction;
     [SerializeField] private float speed;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private Transform groundPos;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float groundRadius;
     public bool facingLeft;
     public bool canMove;
-    [SerializeField] private Joystick joystick;
+    private bool draginLeft;
+    private bool draginRight;
+    [SerializeField] private Button leftButton;
+    [SerializeField] private Button rightButton;
+    [SerializeField] private Button jumpButton;
 
     [Header("Combat")]
     public float damage;
@@ -30,13 +39,13 @@ public class Player : LifeController
 
         platformCheck = GameObject.FindGameObjectWithTag("PlatformCheck").GetComponent<PlatformCheck>();
 
+        jumpButton.onClick.AddListener(JumpButton);
     }
 
     protected override void Start()
     {
         base.Start();
 
-        rb.gravityScale = 0f;
         criticalDamage = 2f * damage;
 
         canMove = true;
@@ -47,10 +56,11 @@ public class Player : LifeController
 
     private void Update()
     {
+        OnGround();
         Inputs();
         Anim();
 
-        if (direction.x < 0 && !facingLeft || direction.x > 0 && facingLeft || joystick.joystickVec.x < 0 && !facingLeft || joystick.joystickVec.x > 0 && facingLeft) Flip();
+        if (rb.velocity.x < 0 && !facingLeft || rb.velocity.x > 0 && facingLeft) Flip();
     }
 
     private void FixedUpdate()
@@ -58,25 +68,10 @@ public class Player : LifeController
         if (!canMove)
         {
             rb.velocity = Vector2.zero;
-            joystick.joystickVec = Vector2.zero;
-
             return;
         }
 
-        if (!platformCheck.IsOnMobile())
-        {
-            Move();
-            return;
-        }
-
-        if (joystick.joystickVec.y != 0)
-        {
-            rb.velocity = new Vector2(joystick.joystickVec.x * speed, joystick.joystickVec.y * speed);
-        }
-        else if (joystick.joystickVec.y == 0)
-        {
-            rb.velocity = Vector2.zero;
-        }
+        Move();
     }
 
     private void Inputs()
@@ -84,15 +79,65 @@ public class Player : LifeController
         if (!canMove) return;
 
         float _x = Input.GetAxisRaw("Horizontal");
-        float _y = Input.GetAxisRaw("Vertical");
 
-        direction = new Vector2(_x, _y).normalized;
+        direction = new Vector2(_x, 0f).normalized;
+        
+
+        if (Input.GetKeyDown(KeyCode.Space) && OnGround()) Jump();
     }
 
     private void Move()
     {
-        rb.MovePosition(rb.position + direction * speed * Time.deltaTime);
+        if (!draginLeft && !draginRight)
+            rb.velocity = new Vector2(direction.x * speed * Time.deltaTime, rb.velocity.y);
+
+        else if (draginRight && !draginLeft)
+            rb.velocity = new Vector2(1 * speed * Time.deltaTime, rb.velocity.y);
+
+        else if (draginLeft && !draginRight)
+            rb.velocity = new Vector2(-1 * speed * Time.deltaTime, rb.velocity.y);
     }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+    }
+
+    private bool OnGround()
+    {
+        return Physics2D.OverlapCircle(
+
+            groundPos.position,
+            groundRadius,
+            groundLayer
+
+            );
+    }
+
+    #region Mobile Movement
+    public void LeftButton()
+    {
+        draginLeft = true;
+    }
+
+    public void RightButton()
+    {
+        draginRight = true;
+    }
+
+    private void JumpButton()
+    {
+        if (OnGround())
+            Jump();
+    }
+
+    public void DragEnd()
+    {
+        draginRight = false;
+        draginLeft = false;
+    }
+
+    #endregion
 
     private void Flip()
     {
@@ -102,9 +147,7 @@ public class Player : LifeController
 
     private void Anim()
     {
-        if (direction.x != 0 || joystick.joystickVec.x != 0) anim.SetFloat("Speed_X", 1f);
+        if (rb.velocity.x != 0) anim.SetFloat("Speed_X", 1f);
         else anim.SetFloat("Speed_X", 0f);
-
-        anim.SetFloat("Speed_Y", direction.y);
     }
 }
