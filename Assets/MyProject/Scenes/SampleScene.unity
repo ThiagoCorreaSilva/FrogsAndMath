@@ -1201,11 +1201,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.1315684
+      value: 10.764547
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7732096
+      value: -4.4220343
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2933,7 +2933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &685073812
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4371,11 +4371,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5570207
+      value: 8.19
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.915244
+      value: -4.3
       objectReference: {fileID: 0}
     - target: {fileID: 3455304688699007706, guid: 3beaee6151acea742b64e28db10c5c78, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6482,6 +6482,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3516061895966932486, guid: 96ab0f610609e624c9d7934a0990687c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516061895966932487, guid: 96ab0f610609e624c9d7934a0990687c, type: 3}
+      propertyPath: m_GravityScale
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3516061895966932728, guid: 96ab0f610609e624c9d7934a0990687c, type: 3}
       propertyPath: fadeIn
       value: 
@@ -6496,7 +6504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3516061895966932729, guid: 96ab0f610609e624c9d7934a0990687c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.07304849
+      value: -4.43
       objectReference: {fileID: 0}
     - target: {fileID: 3516061895966932729, guid: 96ab0f610609e624c9d7934a0990687c, type: 3}
       propertyPath: m_LocalPosition.z

@@ -36,7 +36,6 @@ public class Enemy : LifeController
     {
         base.Start();
 
-        rb.gravityScale = 0f;
         rb.freezeRotation = true;
 
         fadeIn.SetActive(false);
@@ -60,7 +59,7 @@ public class Enemy : LifeController
 
     private void Move()
     {
-        if (DisToPlayer() <= distanceToFollow && !onFight)
+        if (DisToPlayer() <= distanceToFollow && !onFight && player.transform.position.y <= transform.position.y)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.fixedDeltaTime);
 
@@ -70,7 +69,7 @@ public class Enemy : LifeController
             popUp.SetActive(false);
     }
 
-    private void OnTriggerEnter2D(Collider2D _other)
+    private void OnCollisionEnter2D(Collision2D _other)
     {
         if (_other.gameObject.tag == "Player")
         {
