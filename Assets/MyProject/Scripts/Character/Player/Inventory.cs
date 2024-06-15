@@ -64,9 +64,9 @@ public class Inventory : MonoBehaviour
 
         player.canMove = true;
 
-        if (battleSystem.onBattle == false && platformCheck.IsOnMobile()) joystickPanel.SetActive(true);
-    }
+        if (platformCheck.IsOnMobile()) joystickPanel.SetActive(true);
 
+    }
     public void AddItem(GameObject _itemObject)
     {
         if (itemsList.Count >= slots.Length)

@@ -76,6 +76,7 @@ public class Enemy : LifeController
         {
             onFight = true;
             player.canMove = false;
+            player.direction = Vector2.zero;
             battleSystem.enemy = gameObject;
 
             battleSystem.StartBattle();

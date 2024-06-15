@@ -64,6 +64,9 @@ public class BattleSystem : MonoBehaviour
         // Cronometro para o tempo do critico
         timeElapsed += Time.deltaTime;
 
+        if (onBattle && platformCheck.IsOnMobile())
+            joystickPanel.gameObject.SetActive(false);
+
         if (player.death)
         {
             alreadyEnd = true;
