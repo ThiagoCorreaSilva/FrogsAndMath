@@ -65,6 +65,9 @@ public class BattleSystem : MonoBehaviour
 
         if (player.death)
         {
+            cam.orthographicSize = 5;
+            cam.GetComponent<CameraFollow>().stopLerp = false;
+
             battlePanel.SetActive(false);
 
             StopAllCoroutines();
@@ -79,6 +82,10 @@ public class BattleSystem : MonoBehaviour
             winText.gameObject.SetActive(true);
             criticalText.gameObject.SetActive(false);
 
+            cam.orthographicSize = 5;
+            cam.GetComponent<CameraFollow>().stopLerp = false;
+
+            player.gameObject.SetActive(true);
             player.GetComponent<Inventory>().openInventory.gameObject.SetActive(true);
 
             if (platformCheck.IsOnMobile()) joystickPanel.SetActive(true);
@@ -125,6 +132,14 @@ public class BattleSystem : MonoBehaviour
 
                 enemy.GetComponent<Enemy>().TakeDamage(player.criticalDamage);
                 criticalText.gameObject.SetActive(true);
+
+                cam.GetComponent<CameraFollow>().CameraShake();
+                cam.GetComponent<CameraFollow>().stopLerp = true;
+
+                cam.transform.position = new Vector3(battlePos.position.x, battlePos.position.y, cam.transform.position.z);
+                cam.orthographicSize = 2;
+
+                player.gameObject.SetActive(false);
             }
             else
                 enemy.GetComponent<Enemy>().TakeDamage(player.damage);
@@ -137,6 +152,11 @@ public class BattleSystem : MonoBehaviour
             else skipButton.gameObject.SetActive(false);
 
             yield return new WaitForSeconds(turnTime);
+
+            cam.orthographicSize = 5;
+            cam.GetComponent<CameraFollow>().stopLerp = false;
+
+            player.gameObject.SetActive(true);
 
             StartCoroutine(EnemyTurn());
         }

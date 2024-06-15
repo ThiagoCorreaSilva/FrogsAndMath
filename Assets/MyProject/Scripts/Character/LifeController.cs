@@ -6,6 +6,7 @@ public class LifeController : MonoBehaviour
 {
     [SerializeField] protected float currentLife;
     [SerializeField] protected float maxLife;
+    [SerializeField] private GameObject bloodEffect;
     public bool death;
 
     protected virtual void Start()
@@ -21,6 +22,12 @@ public class LifeController : MonoBehaviour
     public void TakeDamage(float _dmg)
     {
         currentLife = Mathf.Max(currentLife - _dmg, 0f);
+
+        if (bloodEffect != null)
+        {
+            GameObject _blood = Instantiate(bloodEffect, transform.position, Quaternion.identity);
+            Destroy(_blood, 0.601f);
+        }
 
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         Invoke("AfterHit", 0.2f);
