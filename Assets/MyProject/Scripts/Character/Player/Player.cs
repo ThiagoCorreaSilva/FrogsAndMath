@@ -35,6 +35,7 @@ public class Player : LifeController
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
         anim = GetComponent<Animator>();
 
         platformCheck = GameObject.FindGameObjectWithTag("PlatformCheck").GetComponent<PlatformCheck>();
