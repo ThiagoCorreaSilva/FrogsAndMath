@@ -112,6 +112,7 @@ public class Player : LifeController
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        anim.SetTrigger("Jump");
     }
 
     private bool OnGround()
@@ -158,7 +159,12 @@ public class Player : LifeController
 
     private void Anim()
     {
+        anim.SetBool("OnGround", OnGround());
+
         if (rb.velocity.x != 0) anim.SetFloat("Speed_X", 1f);
         else anim.SetFloat("Speed_X", 0f);
+
+        if (rb.velocity.y < 0) anim.SetFloat("Speed_Y", 1f);
+        else anim.SetFloat("Speed_Y", 0);
     }
 }
