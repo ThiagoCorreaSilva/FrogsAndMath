@@ -15,9 +15,11 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject joystickPanel;
     [SerializeField] private GameObject playerUI;
     [SerializeField] private BattleSystem battleSystem;
+    [SerializeField] private NPC npc;
     private PlatformCheck platformCheck;
     private bool itemAdded;
     public bool isFull;
+    public bool isOpen;
     private Player player;
 
     private void Start()
@@ -52,7 +54,10 @@ public class Inventory : MonoBehaviour
         playerUI.SetActive(false);
         openInventory.gameObject.SetActive(false);
 
+        npc.StopConversation();
+
         player.canMove = false;
+        isOpen = true;
         player.direction = new Vector3(0f, 0f , 0f);
 
         if (platformCheck.IsOnMobile()) joystickPanel.SetActive(false);
@@ -65,6 +70,7 @@ public class Inventory : MonoBehaviour
         openInventory.gameObject.SetActive(true);
 
         player.canMove = true;
+        isOpen = false;
 
         if (platformCheck.IsOnMobile()) joystickPanel.SetActive(true);
 
