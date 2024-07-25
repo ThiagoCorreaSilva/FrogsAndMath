@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -33,6 +34,7 @@ public class Inventory : MonoBehaviour
         {
             int _index = i;
             slots[i].onClick.AddListener(() => UseItem(_index));
+            slots[i].GetComponentInChildren<TextMeshProUGUI>().gameObject.SetActive(false);
         }
     }
 
@@ -90,7 +92,7 @@ public class Inventory : MonoBehaviour
                 {
                     itemsList[i] = _itemObject;
                     slots[i].GetComponent<Image>().sprite = _itemObject.GetComponent<SpriteRenderer>().sprite;
-                    
+
                     Color _color = slots[i].GetComponent<Image>().color;
                     _color.a = 1f;
                     slots[i].GetComponent<Image>().color = _color;
@@ -103,6 +105,7 @@ public class Inventory : MonoBehaviour
             if (!itemAdded)
             {
                 itemsList.Add(_itemObject);
+
                 slots[itemsList.IndexOf(_itemObject)].GetComponent<Image>().sprite = _itemObject.GetComponent<SpriteRenderer>().sprite;
 
                 Color _color = slots[itemsList.IndexOf(_itemObject)].GetComponent<Image>().color;
@@ -130,13 +133,11 @@ public class Inventory : MonoBehaviour
         _color.a = 0f;
         slots[_slotIndex].GetComponent<Image>().color = _color;
 
-        // Desloca os itens subsequentes para preencher o espaço vazio
         for (int i = _slotIndex; i < itemsList.Count; i++)
         {
             slots[i].GetComponent<Image>().sprite = slots[i + 1].GetComponent<Image>().sprite;
         }
 
-        // Limpa o último slot
         slots[itemsList.Count].GetComponent<Image>().sprite = default;
     }
 
