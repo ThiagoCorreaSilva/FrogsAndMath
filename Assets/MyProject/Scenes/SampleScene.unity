@@ -2787,6 +2787,7 @@ GameObject:
   - component: {fileID: 452713809}
   - component: {fileID: 452713808}
   - component: {fileID: 452713810}
+  - component: {fileID: 452713811}
   m_Layer: 5
   m_Name: DialoguePopUp
   m_TagString: Untagged
@@ -2844,7 +2845,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -2933,6 +2934,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &452713811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452713806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bab1336225e6d543bdb7cd2de040326, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeIn: {fileID: 0}
 --- !u!1 &468982935
 GameObject:
   m_ObjectHideFlags: 0
@@ -4683,7 +4697,7 @@ MonoBehaviour:
   openInventoryHUD: {fileID: 510072007}
   inventory: {fileID: 2096753697}
   mobileHUD: {fileID: 685073811}
-  mobileButton: {fileID: 0}
+  mobileButton: {fileID: 179719522}
   dialoguePopUp: {fileID: 452713808}
   player: {fileID: 2096753693}
   canTalk: 0
@@ -8379,7 +8393,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

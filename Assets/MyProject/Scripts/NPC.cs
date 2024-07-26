@@ -81,7 +81,7 @@ public class NPC : MonoBehaviour
         {
             canTalk = false;
 
-            dialoguePopUp.gameObject.SetActive(false);
+            dialoguePopUp.GetComponent<Animator>().SetTrigger("Close");
         }
     }
 
