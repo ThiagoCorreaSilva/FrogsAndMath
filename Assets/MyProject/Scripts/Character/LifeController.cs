@@ -30,7 +30,7 @@ public class LifeController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void TakeDamage(float _dmg)
+    public virtual void TakeDamage(float _dmg)
     {
         currentLife = Mathf.Max(currentLife - _dmg, 0f);
 

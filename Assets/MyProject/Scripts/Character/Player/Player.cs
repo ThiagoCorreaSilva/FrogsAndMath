@@ -167,4 +167,11 @@ public class Player : LifeController
         if (rb.velocity.y < 0) anim.SetFloat("Speed_Y", 1f);
         else anim.SetFloat("Speed_Y", 0);
     }
+
+    public override void TakeDamage(float _dmg)
+    {
+        anim.SetTrigger("Hit");
+
+        base.TakeDamage(_dmg);
+    }
 }

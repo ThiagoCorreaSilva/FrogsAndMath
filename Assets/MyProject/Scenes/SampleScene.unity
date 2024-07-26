@@ -4683,6 +4683,7 @@ MonoBehaviour:
   openInventoryHUD: {fileID: 510072007}
   inventory: {fileID: 2096753697}
   mobileHUD: {fileID: 685073811}
+  mobileButton: {fileID: 0}
   dialoguePopUp: {fileID: 452713808}
   player: {fileID: 2096753693}
   canTalk: 0
@@ -7461,10 +7462,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3516061896336241816, guid: 96ab0f610609e624c9d7934a0990687c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -132
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516061896336241816, guid: 96ab0f610609e624c9d7934a0990687c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 190
+      objectReference: {fileID: 0}
     - target: {fileID: 3516061896336241817, guid: 96ab0f610609e624c9d7934a0990687c, type: 3}
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3516061896336241831, guid: 96ab0f610609e624c9d7934a0990687c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ed09c50b7c69b0241bb904a4af8ee07d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96ab0f610609e624c9d7934a0990687c, type: 3}
 --- !u!1 &1759408169 stripped
