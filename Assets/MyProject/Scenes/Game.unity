@@ -4927,6 +4927,7 @@ GameObject:
   - component: {fileID: 834374533}
   - component: {fileID: 834374539}
   - component: {fileID: 834374538}
+  - component: {fileID: 834374540}
   m_Layer: 0
   m_Name: ConversationEventInfo
   m_TagString: Untagged
@@ -5129,6 +5130,25 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   NodeID: 16
+  TMPFont: {fileID: 11400000, guid: 5e42947de3713874b82349fdab313700, type: 2}
+  Icon: {fileID: 21300000, guid: fb89a8b83ed80f349bce3cca4ee6be23, type: 3}
+  Audio: {fileID: 0}
+--- !u!114 &834374540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834374528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00abedce3cdbbba46bf2d86c9518c9f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event:
+    m_PersistentCalls:
+      m_Calls: []
+  NodeID: 18
   TMPFont: {fileID: 11400000, guid: 5e42947de3713874b82349fdab313700, type: 2}
   Icon: {fileID: 21300000, guid: fb89a8b83ed80f349bce3cca4ee6be23, type: 3}
   Audio: {fileID: 0}
@@ -7884,17 +7904,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83189876d4d389f43b7dd2e925aa112e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentIDCounter: 18
-  json: "{\"Options\":[{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":11}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":502.5,\"yPos\":-343},\"ID\":3,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"O
-    que aconteceu?\",\"parentUIDs\":[0],\"SpeechUID\":-1},{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":11}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":243,\"yPos\":-347},\"ID\":8,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Mas
-    ja vou ir embora, diga logo\",\"parentUIDs\":[0],\"SpeechUID\":-1},{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":14}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":365,\"yPos\":26},\"ID\":13,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Insetos,
-    ha, exterminar eles \xE9 minha profiss\xE3o\",\"parentUIDs\":[12],\"SpeechUID\":-1},{\"Connections\":[],\"EditorInfo\":{\"isRoot\":false,\"xPos\":357,\"yPos\":365},\"ID\":17,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Agora
-    eu vi vantagem, nos gosta \xE9 disso, amostradinho\",\"parentUIDs\":[16],\"SpeechUID\":-1}],\"Parameters\":[],\"SpeechNodes\":[{\"Connections\":[{\"__type\":\"EditableOptionConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":8},{\"__type\":\"EditableOptionConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":3}],\"EditorInfo\":{\"isRoot\":true,\"xPos\":353.5,\"yPos\":-480},\"ID\":0,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Que
-    bom que voc\xEA chegou!\",\"parentUIDs\":[],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Mushc\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":12}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":369,\"yPos\":-242},\"ID\":11,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Varios
-    insetos est\xE3o atacando minha dungeon!\",\"parentUIDs\":[3,8],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Mushc\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableOptionConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":13}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":365,\"yPos\":-113},\"ID\":12,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Voc\xEA
-    poderia me ajudar?\",\"parentUIDs\":[11],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Mushc\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":16}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":374,\"yPos\":113},\"ID\":14,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Otimo!
-    Siga em frente que voc\xEA conseguira ver eles\",\"parentUIDs\":[13],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Mushc\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableOptionConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":17}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":375,\"yPos\":245},\"ID\":16,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Eu
-    deixei cair uma po\xE7\xE3o de cura, voc\xEA pode usar ela\",\"parentUIDs\":[14],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Mushc\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0,\"Volume\":0}]}"
+  CurrentIDCounter: 19
+  json: "{\"Options\":[{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":11}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":366.5,\"yPos\":-411},\"ID\":3,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"O
+    que aconteceu?\",\"parentUIDs\":[0],\"SpeechUID\":-1},{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":11}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":107,\"yPos\":-415},\"ID\":8,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Mas
+    ja vou ir embora, diga logo\",\"parentUIDs\":[0],\"SpeechUID\":-1},{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":18}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":229,\"yPos\":-42},\"ID\":13,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Insetos,
+    ha, exterminar eles \xE9 minha profiss\xE3o\",\"parentUIDs\":[12],\"SpeechUID\":-1},{\"Connections\":[],\"EditorInfo\":{\"isRoot\":false,\"xPos\":238,\"yPos\":397},\"ID\":17,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Agora
+    eu vi vantagem, nos gosta \xE9 disso, amostradinho\",\"parentUIDs\":[16],\"SpeechUID\":-1}],\"Parameters\":[],\"SpeechNodes\":[{\"Connections\":[{\"__type\":\"EditableOptionConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":8},{\"__type\":\"EditableOptionConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":3}],\"EditorInfo\":{\"isRoot\":true,\"xPos\":217.5,\"yPos\":-548},\"ID\":0,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Que
+    bom que voc\xEA chegou!\",\"parentUIDs\":[],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Mushc\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":12}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":233,\"yPos\":-310},\"ID\":11,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Varios
+    insetos est\xE3o atacando minha dungeon!\",\"parentUIDs\":[3,8],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Mushc\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableOptionConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":13}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":229,\"yPos\":-181},\"ID\":12,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Voc\xEA
+    poderia me ajudar?\",\"parentUIDs\":[11],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Mushc\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":16}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":232,\"yPos\":139},\"ID\":14,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Enquanto
+    eu tava fugindo, percebi que os mais eficazes sao o de soma, multiplica\xE7\xE3o
+    subtra\xE7\xE3o e divis\xE3o\",\"parentUIDs\":[18],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Mushc\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableOptionConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":17}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":230,\"yPos\":266},\"ID\":16,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Eu
+    deixei cair uma po\xE7\xE3o de cura, voc\xEA pode usar ela\",\"parentUIDs\":[14],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Mushc\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0,\"Volume\":0},{\"Connections\":[{\"__type\":\"EditableSpeechConnection:#DialogueEditor\",\"Conditions\":[],\"NodeUID\":14}],\"EditorInfo\":{\"isRoot\":false,\"xPos\":232,\"yPos\":32},\"ID\":18,\"ParamActions\":[],\"TMPFontGUID\":null,\"Text\":\"Antes
+    de tudo, apenas lembrando que os inimigos aqui por algum motivo s\xE3o fracos
+    contra ataques matem\xE1ticos\",\"parentUIDs\":[13],\"AdvanceDialogueAutomatically\":false,\"AudioGUID\":null,\"AutoAdvanceShouldDisplayOption\":false,\"IconGUID\":null,\"Name\":\"Mushc\",\"OptionUIDs\":null,\"SpeechUID\":0,\"TimeUntilAdvance\":0.1,\"Volume\":0}]}"
   saveVersion: 110
   DefaultName: Mushc
   DefaultSprite: {fileID: 21300000, guid: fb89a8b83ed80f349bce3cca4ee6be23, type: 3}
@@ -7909,6 +7932,7 @@ MonoBehaviour:
   - {fileID: 834374533}
   - {fileID: 834374539}
   - {fileID: 834374538}
+  - {fileID: 834374540}
   ContinueFont: {fileID: 11400000, guid: 5e42947de3713874b82349fdab313700, type: 2}
   EndConversationFont: {fileID: 11400000, guid: 5e42947de3713874b82349fdab313700, type: 2}
   Event:
