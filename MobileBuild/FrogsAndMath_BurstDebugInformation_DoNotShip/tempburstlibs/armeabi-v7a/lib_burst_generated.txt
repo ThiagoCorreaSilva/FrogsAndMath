@@ -1,4 +1,4 @@
-Library: D:\GitHub\FrogsAndMath\Temp\StagingArea\tempburstlibs\armeabi-v7a\lib_burst_generated
+Library: C:\Users\mathe\Documents\FrogsAndMath\Temp\StagingArea\tempburstlibs\armeabi-v7a\lib_burst_generated
 --platform=Android
 --backend=burst-llvm-14
 --target=ARMV7A_NEON32
@@ -132,8 +132,8 @@ Library: D:\GitHub\FrogsAndMath\Temp\StagingArea\tempburstlibs\armeabi-v7a\lib_b
 --compilation-defines=ENABLE_SPRITESHAPE_BURST
 --compilation-defines=ENABLE_URP
 --generate-link-xml=Temp\burst.link.xml
---temp-folder=D:\GitHub\FrogsAndMath\Temp\Burst
---output=D:\GitHub\FrogsAndMath\Temp\StagingArea\tempburstlibs\armeabi-v7a\lib_burst_generated
+--temp-folder=C:\Users\mathe\Documents\FrogsAndMath\Temp\Burst
+--output=C:\Users\mathe\Documents\FrogsAndMath\Temp\StagingArea\tempburstlibs\armeabi-v7a\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
 --pdb-search-paths=Temp/ManagedSymbols/
 
